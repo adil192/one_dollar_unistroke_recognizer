@@ -9,7 +9,7 @@ void main() {
         final result =
             recognizeUnistroke(unistroke.points, useProtractor: false);
         expect(result, isNotNull);
-        expect(result!.unistrokeName, unistroke.name);
+        expect(result!.name, unistroke.name);
       });
     }
   });
@@ -19,7 +19,7 @@ void main() {
         final result =
             recognizeUnistroke(unistroke.points, useProtractor: true);
         expect(result, isNotNull);
-        expect(result!.unistrokeName, unistroke.name);
+        expect(result!.name, unistroke.name);
       });
     }
   });

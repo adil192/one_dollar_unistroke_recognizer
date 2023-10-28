@@ -3,11 +3,11 @@
 /// This is the output of [recognizeUnistroke].
 class RecognizedUnistroke {
   /// Creates a [RecognizedUnistroke].
-  const RecognizedUnistroke(this.unistrokeName, this.score)
+  const RecognizedUnistroke(this.name, this.score)
       : assert(score >= 0.0 && score <= 1.0);
 
   /// The recognized unistroke name.
-  final String unistrokeName;
+  final String name;
 
   /// The score of the recognized unistroke.
   ///

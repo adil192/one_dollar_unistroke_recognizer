@@ -8,6 +8,7 @@ import 'package:one_dollar_unistroke_recognizer/src/unistroke.dart';
 import 'package:one_dollar_unistroke_recognizer/src/utils.dart';
 
 export 'package:one_dollar_unistroke_recognizer/src/known_unistrokes.dart' show knownUnistrokesNames;
+export 'package:one_dollar_unistroke_recognizer/src/recognized_unistroke.dart' show RecognizedUnistroke;
 
 /// Recognizes a unistroke from [inputPoints].
 /// 

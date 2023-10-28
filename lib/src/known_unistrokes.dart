@@ -6,7 +6,7 @@ import 'package:one_dollar_unistroke_recognizer/src/unistroke.dart';
 
 /// The names of the known unistrokes.
 /// These are the possible outputs of [recognizeUnistroke].
-late final knownUnistrokesNames = knownUnistrokes.map((e) => e.name).toList();
+final knownUnistrokesNames = knownUnistrokes.map((e) => e.name).toList();
 
 /// The known unistrokes, used to compare the input unistroke to.
 final knownUnistrokes = <Unistroke>[

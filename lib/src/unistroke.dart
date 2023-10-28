@@ -6,12 +6,11 @@ import 'package:one_dollar_unistroke_recognizer/src/utils.dart';
 class Unistroke {
   Unistroke(this.name, Iterable<Offset> inputPoints) {
     points = processInputPoints(inputPoints);
-    vector = vectorize(points);
   }
 
   final String name;
   late final List<Offset> points;
-  late final List<double> vector;
+  late final List<double> vector = vectorize(points);
 
   /// Input points are resampled into this many points.
   static const numPoints = 64;

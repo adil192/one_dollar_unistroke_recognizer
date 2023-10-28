@@ -1,4 +1,8 @@
+/// A recognized unistroke.
+/// 
+/// This is the output of [recognizeUnistroke].
 class RecognizedUnistroke {
+  /// Creates a [RecognizedUnistroke].
   const RecognizedUnistroke(this.unistrokeName, this.score)
       : assert(score >= 0.0 && score <= 1.0);
 

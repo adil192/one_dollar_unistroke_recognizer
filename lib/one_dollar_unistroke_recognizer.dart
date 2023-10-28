@@ -7,7 +7,19 @@ import 'package:one_dollar_unistroke_recognizer/src/recognized_unistroke.dart';
 import 'package:one_dollar_unistroke_recognizer/src/unistroke.dart';
 import 'package:one_dollar_unistroke_recognizer/src/utils.dart';
 
-RecognizedUnistroke? recognizeUnistroke(List<Offset> inputPoints, {bool useProtractor = true}) {
+/// Recognizes a unistroke from [inputPoints].
+/// 
+/// If [useProtractor] is true, the Protractor algorithm is used.
+/// Otherwise, the Golden Section Search algorithm is used.
+/// 
+/// The Protractor algorithm is the newer algorithm and is faster.
+/// 
+/// Returns null if no unistroke could be recognized, otherwise returns a
+/// [RecognizedUnistroke] with the recognized unistroke name and the score.
+RecognizedUnistroke? recognizeUnistroke(
+  List<Offset> inputPoints, {
+  bool useProtractor = true,
+}) {
   final candidate = Unistroke('', inputPoints);
 
   var unistrokeIndex = -1;

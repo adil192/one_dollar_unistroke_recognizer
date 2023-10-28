@@ -1,7 +1,10 @@
+library one_dollar_unistroke_recognizer;
+
 import 'dart:ui';
 
 import 'package:one_dollar_unistroke_recognizer/src/unistroke.dart';
 
+/// The known unistrokes, used to compare the input unistroke to.
 final knownUnistrokes = <Unistroke>[
   Unistroke('triangle', const [
     Offset(137, 139),
@@ -71,7 +74,7 @@ final knownUnistrokes = <Unistroke>[
     Offset(138, 148),
     Offset(136, 148)
   ]),
-  Unistroke("x", const [
+  Unistroke('x', const [
     Offset(87, 142),
     Offset(89, 145),
     Offset(91, 148),
@@ -124,7 +127,7 @@ final knownUnistrokes = <Unistroke>[
     Offset(87, 226),
     Offset(87, 224)
   ]),
-  Unistroke("rectangle", const [
+  Unistroke('rectangle', const [
     Offset(78, 149),
     Offset(78, 153),
     Offset(78, 157),
@@ -208,7 +211,7 @@ final knownUnistrokes = <Unistroke>[
     Offset(81, 133),
     Offset(76, 133)
   ]),
-  Unistroke("circle", const [
+  Unistroke('circle', const [
     Offset(127, 141),
     Offset(124, 140),
     Offset(120, 139),
@@ -254,7 +257,7 @@ final knownUnistrokes = <Unistroke>[
     Offset(129, 136),
     Offset(126, 139)
   ]),
-  Unistroke("check", const [
+  Unistroke('check', const [
     Offset(91, 185),
     Offset(93, 185),
     Offset(95, 185),
@@ -305,7 +308,7 @@ final knownUnistrokes = <Unistroke>[
     Offset(175, 116),
     Offset(173, 118)
   ]),
-  Unistroke("caret", const [
+  Unistroke('caret', const [
     Offset(79, 245),
     Offset(79, 242),
     Offset(79, 239),
@@ -361,7 +364,7 @@ final knownUnistrokes = <Unistroke>[
     Offset(181, 255),
     Offset(182, 257)
   ]),
-  Unistroke("zig-zag", const [
+  Unistroke('zig-zag', const [
     Offset(307, 216),
     Offset(333, 186),
     Offset(356, 215),
@@ -369,7 +372,7 @@ final knownUnistrokes = <Unistroke>[
     Offset(399, 216),
     Offset(418, 186)
   ]),
-  Unistroke("arrow", const [
+  Unistroke('arrow', const [
     Offset(68, 222),
     Offset(70, 220),
     Offset(73, 218),
@@ -437,7 +440,7 @@ final knownUnistrokes = <Unistroke>[
     Offset(165, 194),
     Offset(164, 196)
   ]),
-  Unistroke("left square bracket", const [
+  Unistroke('left square bracket', const [
     Offset(140, 124),
     Offset(138, 123),
     Offset(135, 122),
@@ -515,7 +518,7 @@ final knownUnistrokes = <Unistroke>[
     Offset(157, 236),
     Offset(159, 237)
   ]),
-  Unistroke("right square bracket", const [
+  Unistroke('right square bracket', const [
     Offset(112, 138),
     Offset(112, 136),
     Offset(115, 136),
@@ -562,7 +565,7 @@ final knownUnistrokes = <Unistroke>[
     Offset(114, 238),
     Offset(112, 238)
   ]),
-  Unistroke("v", const [
+  Unistroke('v', const [
     Offset(89, 164),
     Offset(90, 162),
     Offset(92, 162),
@@ -611,7 +614,7 @@ final knownUnistrokes = <Unistroke>[
     Offset(165, 148),
     Offset(166, 146)
   ]),
-  Unistroke("delete", const [
+  Unistroke('delete', const [
     Offset(123, 129),
     Offset(123, 131),
     Offset(124, 133),
@@ -666,7 +669,7 @@ final knownUnistrokes = <Unistroke>[
     Offset(179, 127),
     Offset(180, 125)
   ]),
-  Unistroke("left curly brace", const [
+  Unistroke('left curly brace', const [
     Offset(150, 116),
     Offset(147, 117),
     Offset(145, 116),
@@ -726,7 +729,7 @@ final knownUnistrokes = <Unistroke>[
     Offset(148, 220),
     Offset(151, 221)
   ]),
-  Unistroke("right curly brace", const [
+  Unistroke('right curly brace', const [
     Offset(117, 132),
     Offset(115, 132),
     Offset(115, 129),
@@ -798,7 +801,7 @@ final knownUnistrokes = <Unistroke>[
     Offset(119, 253),
     Offset(115, 253)
   ]),
-  Unistroke("star", const [
+  Unistroke('star', const [
     Offset(75, 250),
     Offset(75, 247),
     Offset(77, 244),
@@ -909,7 +912,7 @@ final knownUnistrokes = <Unistroke>[
     Offset(69, 254),
     Offset(69, 252)
   ]),
-  Unistroke("pigtail", const [
+  Unistroke('pigtail', const [
     Offset(81, 219),
     Offset(84, 218),
     Offset(86, 220),

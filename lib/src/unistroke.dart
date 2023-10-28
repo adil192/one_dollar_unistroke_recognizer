@@ -1,15 +1,31 @@
 import 'dart:math' as math;
 import 'dart:ui' show Offset;
 
+import 'package:flutter/foundation.dart';
 import 'package:one_dollar_unistroke_recognizer/src/utils.dart';
 
+/// A unistroke containing the list of [points]
+/// and optionally a [name].
 class Unistroke {
+  /// Creates a [Unistroke] with the given [name].
+  /// 
+  /// The [inputPoints] are manipulated by [processInputPoints]
+  /// before being stored in [points] and [vector].
   Unistroke(this.name, Iterable<Offset> inputPoints) {
     points = processInputPoints(inputPoints);
   }
 
+  /// The name describing the unistroke.
+  /// 
+  /// The name is only relevant for the [knownUnistrokes] list,
+  /// and it can otherwise just be empty.
   final String name;
+
+  /// The manipulated input points.
   late final List<Offset> points;
+
+  /// The vectorized version of [points],
+  /// used for the Protractor algorithm.
   late final List<double> vector = vectorize(points);
 
   /// Input points are resampled into this many points.
@@ -24,8 +40,12 @@ class Unistroke {
   /// The half diagonal length of [squareSize].
   static const halfSquareDiagonal = squareDiagonal / 2;
 
+  /// The [points] are resampled, rotated, scaled and translated
+  /// to match the [Unistroke.numPoints] and [Unistroke.squareSize] constants.
+  @visibleForTesting
   static List<Offset> processInputPoints(Iterable<Offset> inputPoints) {
-    var points = inputPoints.toList(); // copy to new list since [resample] mutates
+    var points =
+        inputPoints.toList(); // copy to new list since [resample] mutates
     points = resample(points, numPoints);
     final radians = indicativeAngle(points);
     points = rotateBy(points, -radians);

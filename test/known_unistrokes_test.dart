@@ -6,7 +6,8 @@ void main() {
   group('known unistrokes should be recognized (golden section search)', () {
     for (var unistroke in knownUnistrokes) {
       test(unistroke.name, () {
-        final result = recognizeUnistroke(unistroke.points, useProtractor: false);
+        final result =
+            recognizeUnistroke(unistroke.points, useProtractor: false);
         expect(result, isNotNull);
         expect(result!.unistrokeName, unistroke.name);
       });
@@ -15,7 +16,8 @@ void main() {
   group('known unistrokes should be recognized (protractor)', () {
     for (var unistroke in knownUnistrokes) {
       test(unistroke.name, () {
-        final result = recognizeUnistroke(unistroke.points, useProtractor: true);
+        final result =
+            recognizeUnistroke(unistroke.points, useProtractor: true);
         expect(result, isNotNull);
         expect(result!.unistrokeName, unistroke.name);
       });

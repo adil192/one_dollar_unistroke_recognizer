@@ -39,7 +39,7 @@ List<Offset> resample(List<Offset> points,
   }
 
   if (newPoints.length == numPoints - 1) {
-    // sometimes we fall a rounding-error short of adding the last point, so add it if so
+    // sometimes we fall a rounding-error short of adding the last point
     newPoints.add(points.last);
   }
 
@@ -87,13 +87,16 @@ List<Offset> translateTo(List<Offset> points, Offset newCenter) {
   return points.map((p) => p - c + newCenter).toList();
 }
 
+/// Vectorizes [points] into a 1D list of coordinates scaled down
+/// by the square root of the sum of the squared distances.
 List<double> vectorize(List<Offset> points) {
   // for Protractor
   var sum = 0.0;
-  var vector = <double>[];
+  final vector = <double>[];
   for (final point in points) {
-    vector.add(point.dx);
-    vector.add(point.dy);
+    vector
+      ..add(point.dx)
+      ..add(point.dy);
     sum += point.distanceSquared;
   }
   final magnitude = math.sqrt(sum);
@@ -143,12 +146,15 @@ double distanceAtBestAngle(List<Offset> points, Unistroke template, double a,
   return math.min(f1, f2);
 }
 
+/// Returns the [pathDistance] between [points] and [template]
+/// when [points] are rotated by [radians].
 double distanceAtAngle(
     List<Offset> points, Unistroke template, double radians) {
   final newPoints = rotateBy(points, radians);
   return pathDistance(newPoints, template.points);
 }
 
+/// Returns the centroid of [points], i.e. the average of all points.
 Offset centroid(List<Offset> points) {
   var x = 0.0;
   var y = 0.0;
@@ -159,6 +165,7 @@ Offset centroid(List<Offset> points) {
   return Offset(x / points.length, y / points.length);
 }
 
+/// Returns the smallest [Rect] that contains all [points].
 Rect boundingBox(List<Offset> points) {
   var minX = double.infinity;
   var maxX = double.negativeInfinity;
@@ -173,6 +180,9 @@ Rect boundingBox(List<Offset> points) {
   return Rect.fromLTRB(minX, minY, maxX, maxY);
 }
 
+/// Returns the path distance between [points1] and [points2], which is
+/// the average distance between each point in [points1] and the corresponding
+/// point in [points2].
 double pathDistance(List<Offset> points1, List<Offset> points2) {
   assert(points1.length == points2.length);
   var d = 0.0;
@@ -182,6 +192,8 @@ double pathDistance(List<Offset> points1, List<Offset> points2) {
   return d / points1.length;
 }
 
+/// Returns the path length of [points], which is the sum of the distances
+/// between each point.
 double pathLength(List<Offset> points) {
   var d = 0.0;
   for (var i = 1; i < points.length; ++i) {

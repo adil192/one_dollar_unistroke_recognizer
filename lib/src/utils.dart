@@ -19,8 +19,6 @@ final phi = 0.5 * (-1.0 + math.sqrt(5.0));
 /// Note that this mutates [points].
 List<Offset> resample(List<Offset> points,
     [int numPoints = Unistroke.numPoints]) {
-  if (points.length <= numPoints) return points;
-
   final intervalLength = pathLength(points) / (numPoints - 1);
   var currentIntervalD = 0.0;
   final newPoints = <Offset>[points.first];

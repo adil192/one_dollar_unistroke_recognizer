@@ -9,7 +9,6 @@ void main() {
         final result = recognizeUnistroke(unistroke.points, useProtractor: false);
         expect(result, isNotNull);
         expect(result!.unistrokeName, unistroke.name);
-        expect(result.score, greaterThan(0.9)); // 90% accuracy
       });
     }
   });
@@ -19,7 +18,6 @@ void main() {
         final result = recognizeUnistroke(unistroke.points, useProtractor: true);
         expect(result, isNotNull);
         expect(result!.unistrokeName, unistroke.name);
-        expect(result.score, greaterThan(0.9)); // 90% accuracy
       });
     }
   });

@@ -1,7 +1,8 @@
 import 'package:one_dollar_unistroke_recognizer/src/unistroke.dart';
 
 class RecognizedUnistroke {
-  const RecognizedUnistroke(this.unistrokeName, this.score);
+  const RecognizedUnistroke(this.unistrokeName, this.score)
+      : assert(score >= 0.0 && score <= 1.0);
 
   /// The recognized unistroke name.
   final String unistrokeName;

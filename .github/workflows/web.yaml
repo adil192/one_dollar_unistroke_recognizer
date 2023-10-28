@@ -1,13 +1,15 @@
-name: Tests
+name: Publish to GitHub Pages
 
 on:
   workflow_dispatch:
-  pull_request:
   push:
+    branches: [ main ]
 
 jobs:
   build:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
 
     steps:
       - uses: actions/checkout@v3
@@ -28,7 +30,8 @@ jobs:
           cache: true
           cache-key: 'flutter-:os:-:channel:-:version:-:arch:'
 
-      - run: flutter pub get
-
-      - name: Run tests
-        run: flutter test
+      - uses: bluefireteam/flutter-gh-pages@v7
+        with:
+          webRenderer: canvaskit
+          workingDir: example
+          baseHref: /one_dollar_unistroke_recognizer/

@@ -8,7 +8,7 @@ import 'package:one_dollar_unistroke_recognizer/src/utils.dart';
 /// and optionally a [name].
 class Unistroke {
   /// Creates a [Unistroke] with the given [name].
-  /// 
+  ///
   /// The [inputPoints] are manipulated by [processInputPoints]
   /// before being stored in [points] and [vector].
   Unistroke(this.name, Iterable<Offset> inputPoints) {
@@ -16,7 +16,7 @@ class Unistroke {
   }
 
   /// The name describing the unistroke.
-  /// 
+  ///
   /// The name is only relevant for the [knownUnistrokes] list,
   /// and it can otherwise just be empty.
   final String name;

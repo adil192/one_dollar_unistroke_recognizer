@@ -62,7 +62,8 @@ class MyApp extends StatelessWidget {
                   recognized: recognized,
                   onDraw: (points) {
                     if (pointDebounce == null || !pointDebounce!.isActive) {
-                      pointDebounce = Timer(const Duration(milliseconds: 100), () {
+                      pointDebounce =
+                          Timer(const Duration(milliseconds: 100), () {
                         recognized.value = recognizeUnistroke(points);
                       });
                     }

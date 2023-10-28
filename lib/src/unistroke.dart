@@ -4,7 +4,7 @@ import 'dart:ui' show Offset;
 import 'package:one_dollar_unistroke_recognizer/src/utils.dart';
 
 class Unistroke {
-  Unistroke(this.name, List<Offset> inputPoints) {
+  Unistroke(this.name, Iterable<Offset> inputPoints) {
     points = processInputPoints(inputPoints);
     vector = vectorize(points);
   }
@@ -25,8 +25,9 @@ class Unistroke {
   /// The half diagonal length of [squareSize].
   static const halfSquareDiagonal = squareDiagonal / 2;
 
-  static List<Offset> processInputPoints(List<Offset> inputPoints) {
-    var points = resample(inputPoints, numPoints);
+  static List<Offset> processInputPoints(Iterable<Offset> inputPoints) {
+    var points = inputPoints.toList(); // copy to new list since [resample] mutates
+    points = resample(points, numPoints);
     final radians = indicativeAngle(points);
     points = rotateBy(points, -radians);
     points = scaleTo(points, squareSize);

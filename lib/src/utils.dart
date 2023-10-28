@@ -15,6 +15,8 @@ const anglePrecision = math.pi / 90;
 final phi = 0.5 * (-1.0 + math.sqrt(5.0));
 
 /// Resamples [points] to have [numPoints] points.
+///
+/// Note that this mutates [points].
 List<Offset> resample(List<Offset> points,
     [int numPoints = Unistroke.numPoints]) {
   final intervalLength = pathLength(points) / (numPoints - 1);

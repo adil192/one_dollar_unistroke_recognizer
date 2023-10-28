@@ -26,6 +26,9 @@ RecognizedUnistroke? recognizeUnistroke(
   List<Offset> inputPoints, {
   bool useProtractor = true,
 }) {
+  // Not enough points to recognize
+  if (inputPoints.length < Unistroke.numPoints) return null;
+
   final candidate = Unistroke('', inputPoints);
 
   var unistrokeIndex = -1;

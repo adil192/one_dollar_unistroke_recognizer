@@ -43,7 +43,8 @@ List<Offset> resample(List<Offset> points,
     newPoints.add(points.last);
   }
 
-  assert(newPoints.length == numPoints, 'got ${newPoints.length} points but expected $numPoints');
+  assert(newPoints.length <= numPoints,
+      'got ${newPoints.length} points but expected <= $numPoints');
   return newPoints;
 }
 

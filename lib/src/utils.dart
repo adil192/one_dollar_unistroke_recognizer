@@ -19,6 +19,8 @@ final phi = 0.5 * (-1.0 + math.sqrt(5.0));
 /// Note that this mutates [points].
 List<Offset> resample(List<Offset> points,
     [int numPoints = Unistroke.numPoints]) {
+  if (points.length <= numPoints) return points;
+
   final intervalLength = pathLength(points) / (numPoints - 1);
   var currentIntervalD = 0.0;
   final newPoints = <Offset>[points.first];
@@ -43,7 +45,7 @@ List<Offset> resample(List<Offset> points,
     newPoints.add(points.last);
   }
 
-  assert(newPoints.length == numPoints);
+  assert(newPoints.length == numPoints, 'got ${newPoints.length} points but expected $numPoints');
   return newPoints;
 }
 
@@ -90,7 +92,6 @@ List<Offset> translateTo(List<Offset> points, Offset newCenter) {
 /// Vectorizes [points] into a 1D list of coordinates scaled down
 /// by the square root of the sum of the squared distances.
 List<double> vectorize(List<Offset> points) {
-  // for Protractor
   var sum = 0.0;
   final vector = <double>[];
   for (final point in points) {
@@ -108,10 +109,10 @@ List<double> vectorize(List<Offset> points) {
 
 /// Protractor algorithm (optimized $1 recognizer)
 double optimalCosineDistance(List<double> vector1, List<double> vector2) {
-  // for Protractor
+  final minLength = math.min(vector1.length, vector2.length);
   var a = 0.0;
   var b = 0.0;
-  for (var i = 0; i < vector1.length; i += 2) {
+  for (var i = 0; i < minLength - 1; i += 2) {
     a += vector1[i] * vector2[i] + vector1[i + 1] * vector2[i + 1];
     b += vector1[i] * vector2[i + 1] - vector1[i + 1] * vector2[i];
   }

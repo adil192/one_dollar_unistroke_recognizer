@@ -9,7 +9,7 @@ import 'package:one_dollar_unistroke_recognizer/src/unistroke.dart';
 final knownUnistrokesNames = knownUnistrokes.map((e) => e.name).toList();
 
 /// The known unistrokes, used to compare the input unistroke to.
-final knownUnistrokes = <Unistroke>[
+final knownUnistrokes = List<Unistroke>.unmodifiable([
   Unistroke('triangle', const [
     Offset(137, 139),
     Offset(135, 141),
@@ -983,4 +983,4 @@ final knownUnistrokes = <Unistroke>[
     Offset(199, 212),
     Offset(201, 211)
   ]),
-];
+]);

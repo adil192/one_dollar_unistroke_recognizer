@@ -94,7 +94,7 @@ List<double> vectorize(List<Offset> points) {
   for (final point in points) {
     vector.add(point.dx);
     vector.add(point.dy);
-    sum += point.distance;
+    sum += point.distanceSquared;
   }
   final magnitude = math.sqrt(sum);
   for (var i = 0; i < vector.length; ++i) {

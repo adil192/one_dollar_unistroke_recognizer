@@ -6,10 +6,12 @@ class CanvasDraw extends StatefulWidget {
     super.key,
     required this.recognized,
     required this.onDraw,
+    required this.onDrawEnd,
   });
 
   final ValueNotifier<RecognizedUnistroke?> recognized;
   final void Function(List<Offset>) onDraw;
+  final void Function(List<Offset>) onDrawEnd;
 
   @override
   State<CanvasDraw> createState() => _CanvasDrawState();
@@ -44,6 +46,9 @@ class _CanvasDrawState extends State<CanvasDraw> with ChangeNotifier {
       onPanUpdate: (details) {
         points.add(details.localPosition);
         notifyListeners();
+      },
+      onPanEnd: (details) {
+        widget.onDrawEnd(points);
       },
       child: CustomPaint(
         painter: _CanvasDrawPainter(this),

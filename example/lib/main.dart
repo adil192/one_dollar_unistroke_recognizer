@@ -68,6 +68,11 @@ class MyApp extends StatelessWidget {
                       });
                     }
                   },
+                  onDrawEnd: (points) {
+                    pointDebounce?.cancel();
+                    pointDebounce = null;
+                    recognized.value = recognizeUnistroke(points);
+                  },
                 ),
               ),
             ),

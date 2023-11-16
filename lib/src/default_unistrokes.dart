@@ -4,12 +4,9 @@ import 'dart:ui';
 
 import 'package:one_dollar_unistroke_recognizer/src/unistroke.dart';
 
-/// The names of the known unistrokes.
-/// These are the possible outputs of [recognizeUnistroke].
-final knownUnistrokesNames = knownUnistrokes.map((e) => e.name).toList();
-
-/// The known unistrokes, used to compare the input unistroke to.
-final knownUnistrokes = List<Unistroke>.unmodifiable([
+/// The default set of unistroke templates,
+/// taken from the JavaScript version of the $1 recognizer.
+final default$1Unistrokes = List<Unistroke>.unmodifiable([
   Unistroke('triangle', const [
     Offset(137, 139),
     Offset(135, 141),

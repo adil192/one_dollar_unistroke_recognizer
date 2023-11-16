@@ -2,15 +2,23 @@ library one_dollar_unistroke_recognizer;
 
 import 'dart:ui' show Offset;
 
-import 'package:one_dollar_unistroke_recognizer/src/known_unistrokes.dart';
+import 'package:one_dollar_unistroke_recognizer/src/default_unistrokes.dart';
 import 'package:one_dollar_unistroke_recognizer/src/recognized_unistroke.dart';
 import 'package:one_dollar_unistroke_recognizer/src/unistroke.dart';
 import 'package:one_dollar_unistroke_recognizer/src/utils.dart';
 
-export 'package:one_dollar_unistroke_recognizer/src/known_unistrokes.dart'
-    show knownUnistrokesNames;
+export 'package:one_dollar_unistroke_recognizer/src/default_unistrokes.dart'
+    show default$1Unistrokes;
 export 'package:one_dollar_unistroke_recognizer/src/recognized_unistroke.dart'
     show RecognizedUnistroke;
+
+/// The unistroke templates that can be recognized by [recognizeUnistroke].
+///
+/// Multiple unistrokes can have the same name. This is useful if you want to
+/// improve the recognition of a unistroke by adding multiple templates.
+///
+/// The default value is [default$1Unistrokes].
+var referenceUnistrokes = default$1Unistrokes;
 
 /// Recognizes a unistroke from [inputPoints].
 ///
@@ -21,42 +29,48 @@ export 'package:one_dollar_unistroke_recognizer/src/recognized_unistroke.dart'
 ///
 /// Returns null if no unistroke could be recognized, otherwise returns a
 /// [RecognizedUnistroke] with the recognized unistroke name and the score.
-/// The name will be one of the names in [knownUnistrokesNames].
+/// The name will be one of the names of the templates in [referenceUnistrokes].
 ///
-/// In the future, you will be able to add your own unistrokes to the recognizer
+/// You can set [referenceUnistrokes] to a list of your own unistroke templates
+/// if you want to recognize a different set of unistrokes.
+///
+/// Alternatively, you can set [overrideReferenceUnistrokes] to override
+/// [referenceUnistrokes] for this call only.
 RecognizedUnistroke? recognizeUnistroke(
   List<Offset> inputPoints, {
   bool useProtractor = true,
+  List<Unistroke>? overrideReferenceUnistrokes,
 }) {
   // Not enough points to recognize
   if (inputPoints.length < Unistroke.numPoints) return null;
 
   final candidate = Unistroke('', inputPoints);
 
-  var unistrokeIndex = -1;
-  var leastDistance = double.infinity;
+  Unistroke? closestUnistroke;
+  var closestUnistrokeDist = double.infinity;
 
-  for (var i = 0; i < knownUnistrokes.length; ++i) {
-    // for each unistroke template
+  assert((overrideReferenceUnistrokes ?? referenceUnistrokes).isNotEmpty);
+  for (final unistrokeTemplate
+      in (overrideReferenceUnistrokes ?? referenceUnistrokes)) {
     final distance = useProtractor
-        ? optimalCosineDistance(knownUnistrokes[i].vector, candidate.vector)
-        : distanceAtBestAngle(candidate.points, knownUnistrokes[i], -angleRange,
+        ? optimalCosineDistance(unistrokeTemplate.vector, candidate.vector)
+        : distanceAtBestAngle(candidate.points, unistrokeTemplate, -angleRange,
             angleRange, anglePrecision);
 
-    if (distance < leastDistance) {
-      leastDistance = distance;
-      unistrokeIndex = i;
+    if (distance < closestUnistrokeDist) {
+      closestUnistrokeDist = distance;
+      closestUnistroke = unistrokeTemplate;
     }
   }
 
-  if (unistrokeIndex == -1) {
+  if (closestUnistroke == null) {
     return null;
   } else {
     return RecognizedUnistroke(
-      knownUnistrokes[unistrokeIndex].name,
+      closestUnistroke.name,
       useProtractor
-          ? (1.0 - leastDistance)
-          : (1.0 - leastDistance / Unistroke.squareDiagonal),
+          ? (1.0 - closestUnistrokeDist)
+          : (1.0 - closestUnistrokeDist / Unistroke.squareDiagonal),
     );
   }
 }

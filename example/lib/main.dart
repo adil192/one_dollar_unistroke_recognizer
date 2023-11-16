@@ -46,9 +46,9 @@ class MyApp extends StatelessWidget {
                     spacing: 8.0,
                     runSpacing: 8.0,
                     children: [
-                      for (final name in knownUnistrokesNames)
+                      for (final referenceUnistroke in referenceUnistrokes)
                         Chip(
-                          label: Text(name),
+                          label: Text(referenceUnistroke.name),
                         ),
                     ],
                   ),

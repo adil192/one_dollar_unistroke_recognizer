@@ -4,6 +4,8 @@ A Dart port of the $1 Unistroke Recognizer, with some additional features planne
 
 ## Usage
 
+#### Basic usage
+
 ```dart
 List<Offset> points = [...];
 RecognizedUnistroke? recognized = recognizeUnistroke(points);
@@ -14,9 +16,46 @@ if (recognized == null) {
 }
 ```
 
+#### Protractor enhancement
+
+The Protractor enhancement is enabled by default. You can disable it by setting `useProtractor` to `false`.
+
+```dart
+RecognizedUnistroke? recognized = recognizeUnistroke(
+  points,
+  useProtractor: false,
+);
+```
+
+#### Using custom unistroke templates
+
+You can recognize custom unistrokes by setting the `referenceUnistrokes` list.
+
+Note that this will disable the default unistroke templates defined in `default$1Unistrokes`.
+
+```dart
+referenceUnistrokes = [
+  Unistroke('circle', [...]),
+  Unistroke('square', [...]),
+  Unistroke('triangle', [...]),
+  Unistroke('leaf', [...]),
+];
+
+RecognizedUnistroke? recognized = recognizeUnistroke(points);
+```
+
+Alternatively, you can temporarily override the `referenceUnistrokes` list for a single call to `recognizeUnistroke` by setting the `overrideReferenceUnistrokes` list.
+
+```dart
+RecognizedUnistroke? recognized = recognizeUnistroke(
+  points,
+  overrideReferenceUnistrokes: [...],
+);
+```
+
 ## Planned features
 
-- [ ] Allow adding custom unistrokes.
+- [X] Allow recognizing custom unistrokes.
 - [ ] Create a subpackage containing a collection of unistrokes for common symbols.
 - [ ] Convert user's stroke into a perfect shape.
 

@@ -1,3 +1,5 @@
+import 'dart:ui' show PointMode;
+
 import 'package:flutter/material.dart';
 import 'package:one_dollar_unistroke_recognizer/one_dollar_unistroke_recognizer.dart';
 
@@ -67,14 +69,32 @@ class _CanvasDrawPainter extends CustomPainter {
     final paint = Paint()
       ..color = Colors.black.withOpacity(0.5)
       ..strokeWidth = 3
-      ..strokeCap = StrokeCap.round;
-    for (var i = 0; i < state.points.length - 1; i++) {
-      canvas.drawLine(state.points[i], state.points[i + 1], paint);
+      ..strokeCap = StrokeCap.round
+      ..style = PaintingStyle.stroke;
+
+    canvas.drawPoints(PointMode.polygon, state.points, paint);
+
+    paint.color = Colors.blue.withOpacity(0.5);
+
+    final recognized = state.widget.recognized.value;
+    switch (recognized?.name) {
+      case null:
+        break;
+      case 'circle':
+        final circle = recognized!.convertToCircle();
+        canvas.drawCircle(circle.$1, circle.$2, paint);
+        break;
+      default:
+        final polygon = recognized!.convertToCanonicalPolygon();
+        canvas.drawPath(Path()..addPolygon(polygon, true), paint);
+        break;
     }
   }
 
   @override
   bool shouldRepaint(covariant _CanvasDrawPainter oldDelegate) {
-    return oldDelegate.state.points != state.points;
+    return oldDelegate.state.points != state.points ||
+        oldDelegate.state.widget.recognized.value?.name !=
+            state.widget.recognized.value?.name;
   }
 }

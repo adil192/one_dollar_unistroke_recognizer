@@ -71,6 +71,8 @@ RecognizedUnistroke? recognizeUnistroke(
       useProtractor
           ? (1.0 - closestUnistrokeDist)
           : (1.0 - closestUnistrokeDist / Unistroke.squareDiagonal),
+      originalPoints: inputPoints,
+      referenceUnistrokes: overrideReferenceUnistrokes ?? referenceUnistrokes,
     );
   }
 }

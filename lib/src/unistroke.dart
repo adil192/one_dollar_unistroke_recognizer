@@ -11,7 +11,11 @@ class Unistroke {
   ///
   /// The [inputPoints] are manipulated by [processInputPoints]
   /// before being stored in [points] and [vector].
-  Unistroke(this.name, Iterable<Offset> inputPoints) {
+  Unistroke(
+    this.name,
+    Iterable<Offset> inputPoints, {
+    this.isCanonical = false,
+  }) {
     points = processInputPoints(inputPoints);
   }
 
@@ -27,6 +31,15 @@ class Unistroke {
   /// The vectorized version of [points],
   /// used for the Protractor algorithm.
   late final List<double> vector = vectorize(points);
+
+  /// Whether this unistroke's [points] should be considered as the ideal
+  /// shape of a unistroke with name [name].
+  ///
+  /// This is used in [RecognizedUnistroke.getCanonicalPolygon].
+  ///
+  /// If no unistroke is canonical, the first unistroke in the list of
+  /// [RecognizedUnistroke.referenceUnistrokes] is chosen.
+  final bool isCanonical;
 
   /// Input points are resampled into this many points.
   static const numPoints = 64;

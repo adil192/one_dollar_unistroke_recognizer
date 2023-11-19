@@ -57,7 +57,7 @@ RecognizedUnistroke? recognized = recognizeUnistroke(
 
 - [X] Allow recognizing custom unistrokes.
 - [ ] Create a subpackage containing a collection of unistrokes for common symbols.
-- [ ] Convert user's stroke into a perfect shape.
+- [X] Convert user's stroke into a perfect shape.
 
 ## About the $1 Unistroke Recognizer
 

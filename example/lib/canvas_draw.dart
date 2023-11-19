@@ -86,7 +86,7 @@ class _CanvasDrawPainter extends CustomPainter {
         break;
       default:
         final polygon = recognized!.convertToCanonicalPolygon();
-        canvas.drawPath(Path()..addPolygon(polygon, true), paint);
+        canvas.drawPoints(PointMode.polygon, polygon, paint);
         break;
     }
   }

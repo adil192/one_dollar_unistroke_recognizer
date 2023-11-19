@@ -27,6 +27,26 @@ RecognizedUnistroke? recognized = recognizeUnistroke(
 );
 ```
 
+#### Getting the "perfect" (canonical) shape
+
+You can get a "perfect" shape from the user's stroke by calling `convertToCanonicalPolygon` or `convertToCircle` on the `RecognizedUnistroke` object.
+
+```dart
+RecognizedUnistroke? recognized = recognizeUnistroke(points);
+switch (recognized?.name) {
+  case null:
+    break;
+  case 'circle':
+    final circle = recognized!.convertToCircle();
+    canvas.drawCircle(circle.$1, circle.$2, paint);
+    break;
+  default:
+    final polygon = recognized!.convertToCanonicalPolygon();
+    canvas.drawPoints(PointMode.polygon, polygon, paint);
+    break;
+}
+```
+
 #### Using custom unistroke templates
 
 You can recognize custom unistrokes by setting the `referenceUnistrokes` list.
@@ -55,9 +75,9 @@ RecognizedUnistroke? recognized = recognizeUnistroke(
 
 ## Planned features
 
-- [X] Allow recognizing custom unistrokes.
+- [X] <s>Allow recognizing custom unistrokes.</s>
+- [X] <s>Convert user's stroke into a perfect shape.</s>
 - [ ] Create a subpackage containing a collection of unistrokes for common symbols.
-- [X] Convert user's stroke into a perfect shape.
 
 ## About the $1 Unistroke Recognizer
 

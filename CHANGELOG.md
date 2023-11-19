@@ -1,3 +1,7 @@
+## 0.3.1
+
+* Scores can now only be between 0 and 1. Would-be negative scores are interpreted to mean that the stroke is not recognized, so `null` is returned.
+
 ## 0.3.0
 
 * Added functions to `RecognizedUnistroke` to get a "perfect" shape from the user's stroke: see `RecognizedUnistroke.convertToCanonicalPolygon` and `RecognizedUnistroke.convertToCircle`.

@@ -63,16 +63,17 @@ RecognizedUnistroke? recognizeUnistroke(
     }
   }
 
-  if (closestUnistroke == null) {
-    return null;
-  } else {
-    return RecognizedUnistroke(
-      closestUnistroke.name,
-      useProtractor
-          ? (1.0 - closestUnistrokeDist)
-          : (1.0 - closestUnistrokeDist / Unistroke.squareDiagonal),
-      originalPoints: inputPoints,
-      referenceUnistrokes: overrideReferenceUnistrokes ?? referenceUnistrokes,
-    );
-  }
+  if (closestUnistroke == null) return null;
+
+  final score = useProtractor
+      ? (1.0 - closestUnistrokeDist)
+      : (1.0 - closestUnistrokeDist / Unistroke.squareDiagonal);
+  if (score < 0) return null;
+
+  return RecognizedUnistroke(
+    closestUnistroke.name,
+    score,
+    originalPoints: inputPoints,
+    referenceUnistrokes: overrideReferenceUnistrokes ?? referenceUnistrokes,
+  );
 }

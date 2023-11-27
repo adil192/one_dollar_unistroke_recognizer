@@ -1,5 +1,5 @@
 import 'dart:math';
-import 'dart:ui' show Offset, Size, Rect;
+import 'dart:ui' show Offset, Rect;
 
 import 'package:one_dollar_unistroke_recognizer/src/unistroke.dart';
 

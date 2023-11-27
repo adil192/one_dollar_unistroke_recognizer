@@ -124,17 +124,20 @@ Iterable<Offset> get _approximateCircle sync* {
   const maxVariance = 50.0;
   const center = Offset(200, 200);
   const numPoints = 64;
-  const t = 10 / numPoints;
+  const t = 5 / numPoints;
 
   final random = math.Random(100);
-  double variance = 0;
+  Offset variance = Offset.zero;
 
   for (var i = 0; i < numPoints; i++) {
     final angle = 2 * math.pi * i / numPoints;
-    variance = variance * (1 - t) + random.nextDouble() * maxVariance * t;
+    variance = Offset(
+      variance.dx * (1 - t) + random.nextVariance(maxVariance) * t,
+      variance.dy * (1 - t) + random.nextVariance(maxVariance) * t,
+    );
 
-    final x = center.dx + radius * math.cos(angle) + variance;
-    final y = center.dy + radius * math.sin(angle) + variance;
+    final x = center.dx + radius * math.cos(angle) + variance.dx;
+    final y = center.dy + radius * math.sin(angle) + variance.dy;
     yield Offset(x, y);
   }
 }
@@ -178,21 +181,31 @@ Iterable<Offset> _approximatePolygon(List<Offset> corners) sync* {
   final t = 5 / numPointsPerSide / (corners.length - 1);
 
   final random = math.Random(100);
-  double variance = 0;
+  Offset variance = Offset.zero;
 
   for (int corner = 0; corner < corners.length - 1; corner++) {
     final start = corners[corner];
     final end = corners[corner + 1];
 
     for (int i = 0; i < numPointsPerSide; i++) {
-      variance = variance * (1 - t) + random.nextDouble() * maxVariance * t;
+      variance = Offset(
+        variance.dx * (1 - t) + random.nextVariance(maxVariance) * t,
+        variance.dy * (1 - t) + random.nextVariance(maxVariance) * t,
+      );
 
       yield Offset.lerp(
         start,
         end,
         i / numPointsPerSide,
       )!
-          .translate(variance, variance);
+          .translate(variance.dx, variance.dy);
     }
+  }
+}
+
+extension on math.Random {
+  /// Generates a random double between [-maxVariance, maxVariance].
+  double nextVariance(double maxVariance) {
+    return nextDouble() * 2 * maxVariance - maxVariance;
   }
 }

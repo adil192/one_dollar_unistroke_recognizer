@@ -29,6 +29,52 @@ void main() {
         matchesGoldenFile('goldens/circle.png'),
       );
     });
+
+    testWidgets('Rectangle', (tester) async {
+      final recognized = recognizeUnistroke(_approximateSquare.toList());
+      expect(recognized, isNotNull);
+      expect(recognized!.name, 'rectangle');
+
+      await tester.pumpWidget(Center(
+        child: SizedBox(
+          width: 400,
+          height: 400,
+          child: RepaintBoundary(
+            child: CustomPaint(
+              painter: _Painter(recognized),
+            ),
+          ),
+        ),
+      ));
+
+      await expectLater(
+        find.byType(CustomPaint),
+        matchesGoldenFile('goldens/rectangle.png'),
+      );
+    });
+
+    testWidgets('Triangle', (tester) async {
+      final recognized = recognizeUnistroke(_approximateTriangle.toList());
+      expect(recognized, isNotNull);
+      expect(recognized!.name, 'triangle');
+
+      await tester.pumpWidget(Center(
+        child: SizedBox(
+          width: 400,
+          height: 400,
+          child: RepaintBoundary(
+            child: CustomPaint(
+              painter: _Painter(recognized),
+            ),
+          ),
+        ),
+      ));
+
+      await expectLater(
+        find.byType(CustomPaint),
+        matchesGoldenFile('goldens/triangle.png'),
+      );
+    });
   });
 }
 
@@ -44,22 +90,27 @@ class _Painter extends CustomPainter {
       ..style = PaintingStyle.stroke;
 
     final circle = recognizedStroke.convertToCircle();
+    final rect = recognizedStroke.convertToRect();
 
     canvas
       ..drawPoints(
         PointMode.polygon,
         recognizedStroke.originalPoints,
-        paint..color = Colors.black,
+        paint..color = Colors.black.withOpacity(0.5),
       )
       ..drawPoints(
         PointMode.polygon,
         recognizedStroke.convertToCanonicalPolygon(),
-        paint..color = Colors.red.withOpacity(0.5),
+        paint..color = Colors.red,
       )
       ..drawCircle(
         circle.$1,
         circle.$2,
         paint..color = Colors.blue.withOpacity(0.5),
+      )
+      ..drawRect(
+        rect,
+        paint..color = Colors.green.withOpacity(0.5),
       );
   }
 
@@ -85,5 +136,63 @@ Iterable<Offset> get _approximateCircle sync* {
     final x = center.dx + radius * math.cos(angle) + variance;
     final y = center.dy + radius * math.sin(angle) + variance;
     yield Offset(x, y);
+  }
+}
+
+Iterable<Offset> get _approximateSquare {
+  final rect = Rect.fromCenter(
+    center: const Offset(200, 200),
+    width: 200,
+    height: 200,
+  );
+  final corners = [
+    rect.topLeft,
+    rect.topRight,
+    rect.bottomRight,
+    rect.bottomLeft,
+    rect.topLeft,
+  ];
+  return _approximatePolygon(corners);
+}
+
+Iterable<Offset> get _approximateTriangle {
+  final rect = Rect.fromCenter(
+    center: const Offset(200, 200),
+    width: 200,
+    height: 200,
+  );
+  final corners = [
+    rect.topCenter,
+    rect.bottomRight,
+    rect.bottomLeft,
+    rect.topCenter,
+  ];
+  return _approximatePolygon(corners);
+}
+
+Iterable<Offset> _approximatePolygon(List<Offset> corners) sync* {
+  assert(corners.first == corners.last);
+
+  const maxVariance = 50.0;
+  final numPointsPerSide = 64 / (corners.length - 1);
+  final t = 5 / numPointsPerSide / (corners.length - 1);
+
+  final random = math.Random(100);
+  double variance = 0;
+
+  for (int corner = 0; corner < corners.length - 1; corner++) {
+    final start = corners[corner];
+    final end = corners[corner + 1];
+
+    for (int i = 0; i < numPointsPerSide; i++) {
+      variance = variance * (1 - t) + random.nextDouble() * maxVariance * t;
+
+      yield Offset.lerp(
+        start,
+        end,
+        i / numPointsPerSide,
+      )!
+          .translate(variance, variance);
+    }
   }
 }

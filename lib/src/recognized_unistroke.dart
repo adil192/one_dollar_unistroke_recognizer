@@ -75,6 +75,11 @@ class RecognizedUnistroke {
     return (rect.center, radius);
   }
 
+  /// Gets the bounding box of the recognized unistroke.
+  ///
+  /// This function is useful for recognized squares/rectangles.
+  Rect convertToRect() => boundingBox(originalPoints);
+
   /// Gets the canonical form of this unistroke.
   @visibleForTesting
   Unistroke findUnscaledCanonicalPolygon() {

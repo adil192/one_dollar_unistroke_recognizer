@@ -4,6 +4,9 @@ import 'package:one_dollar_unistroke_recognizer/src/unistroke.dart';
 
 /// The example set of unistroke templates,
 /// taken from the JavaScript version of the $1 recognizer.
+///
+/// I wouldn't recommend using these templates in a real app,
+/// since they were probably intended to just be a proof-of-concept.
 final example$1Unistrokes = List<Unistroke>.unmodifiable([
   Unistroke('triangle', const [
     Offset(137, 139),

@@ -56,7 +56,7 @@ Note that this will disable the default unistroke templates defined in `default$
 ```dart
 referenceUnistrokes = [
   Unistroke('circle', [...]),
-  Unistroke('square', [...]),
+  Unistroke('rectangle', [...]),
   Unistroke('triangle', [...]),
   Unistroke('leaf', [...]),
 ];
@@ -73,11 +73,7 @@ RecognizedUnistroke? recognized = recognizeUnistroke(
 );
 ```
 
-## Planned features
-
-- [X] <s>Allow recognizing custom unistrokes.</s>
-- [X] <s>Convert user's stroke into a perfect shape.</s>
-- [ ] Create a subpackage containing a collection of unistrokes for common symbols.
+You could also set `referenceUnistrokes` to `example$1Unistrokes` to use the templates that were originally defined in the paper, though they're not very pretty and were probably intended to just be a proof-of-concept.
 
 ## About the $1 Unistroke Recognizer
 

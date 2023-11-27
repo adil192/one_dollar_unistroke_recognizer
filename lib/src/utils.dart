@@ -120,7 +120,7 @@ double optimalCosineDistance(List<double> vector1, List<double> vector2) {
 }
 
 /// Golden section search (original $1 recognizer)
-double distanceAtBestAngle(List<Offset> points, Unistroke template, double a,
+double distanceAtBestAngle(List<Offset> points, List<Offset> template, double a,
     double b, double threshold) {
   var x1 = phi * a + (1.0 - phi) * b;
   var f1 = distanceAtAngle(points, template, x1);
@@ -149,9 +149,12 @@ double distanceAtBestAngle(List<Offset> points, Unistroke template, double a,
 /// Returns the [pathDistance] between [points] and [template]
 /// when [points] are rotated by [radians].
 double distanceAtAngle(
-    List<Offset> points, Unistroke template, double radians) {
+  List<Offset> points,
+  List<Offset> template,
+  double radians,
+) {
   final newPoints = rotateBy(points, radians);
-  return pathDistance(newPoints, template.points);
+  return pathDistance(newPoints, template);
 }
 
 /// Returns the centroid of [points], i.e. the average of all points.

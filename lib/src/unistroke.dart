@@ -32,6 +32,12 @@ class Unistroke {
   /// used for the Protractor algorithm.
   late final List<double> vector = vectorize(points);
 
+  /// [points] but in reverse order.
+  late final List<Offset> reversedPoints = points.reversed.toList();
+
+  /// [vector] but in reverse order.
+  late final List<double> reversedVector = vectorize(reversedPoints);
+
   /// Whether this unistroke's [points] should be considered as the ideal
   /// shape of a unistroke with name [name].
   ///

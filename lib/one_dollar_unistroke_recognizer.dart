@@ -57,12 +57,36 @@ RecognizedUnistroke? recognizeUnistroke(
   for (final unistrokeTemplate
       in (overrideReferenceUnistrokes ?? referenceUnistrokes)) {
     final distance = useProtractor
-        ? optimalCosineDistance(unistrokeTemplate.vector, candidate.vector)
-        : distanceAtBestAngle(candidate.points, unistrokeTemplate, -angleRange,
-            angleRange, anglePrecision);
-
+        ? optimalCosineDistance(
+            unistrokeTemplate.vector,
+            candidate.vector,
+          )
+        : distanceAtBestAngle(
+            candidate.points,
+            unistrokeTemplate.points,
+            -angleRange,
+            angleRange,
+            anglePrecision,
+          );
     if (distance < closestUnistrokeDist) {
       closestUnistrokeDist = distance;
+      closestUnistroke = unistrokeTemplate;
+    }
+
+    final reverseDistance = useProtractor
+        ? optimalCosineDistance(
+            unistrokeTemplate.reversedVector,
+            candidate.vector,
+          )
+        : distanceAtBestAngle(
+            candidate.points,
+            unistrokeTemplate.reversedPoints,
+            -angleRange,
+            angleRange,
+            anglePrecision,
+          );
+    if (reverseDistance < closestUnistrokeDist) {
+      closestUnistrokeDist = reverseDistance;
       closestUnistroke = unistrokeTemplate;
     }
   }

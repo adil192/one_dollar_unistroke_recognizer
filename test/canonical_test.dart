@@ -79,7 +79,7 @@ Iterable<Offset> get _approximateCircle sync* {
   double variance = 0;
 
   for (var i = 0; i < numPoints; i++) {
-    final angle = 2 * math.pi * (1 - i / numPoints);
+    final angle = 2 * math.pi * i / numPoints;
     variance = variance * (1 - t) + random.nextDouble() * maxVariance * t;
 
     final x = center.dx + radius * math.cos(angle) + variance;

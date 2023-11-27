@@ -9,6 +9,8 @@ import 'package:one_dollar_unistroke_recognizer/src/utils.dart';
 
 export 'package:one_dollar_unistroke_recognizer/src/default_unistrokes.dart'
     show default$1Unistrokes;
+export 'package:one_dollar_unistroke_recognizer/src/example_unistrokes.dart'
+    show example$1Unistrokes;
 export 'package:one_dollar_unistroke_recognizer/src/recognized_unistroke.dart'
     show RecognizedUnistroke;
 
@@ -18,6 +20,8 @@ export 'package:one_dollar_unistroke_recognizer/src/recognized_unistroke.dart'
 /// improve the recognition of a unistroke by adding multiple templates.
 ///
 /// The default value is [default$1Unistrokes].
+/// See also [example$1Unistrokes],
+/// or provide your own list of unistroke templates.
 var referenceUnistrokes = default$1Unistrokes;
 
 /// Recognizes a unistroke from [inputPoints].

@@ -1,6 +1,10 @@
+## 0.4.2
+
+* Removed colored text from README since it doesn't work on pub.dev.
+
 ## 0.4.1
 
-* Fixed images on pub.dev.
+* Fixed images in the README on pub.dev.
 * Added a `RecognizedUnistroke.convertToOval()` method.
 
 ## 0.4.0

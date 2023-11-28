@@ -81,8 +81,8 @@ class _CanvasDrawPainter extends CustomPainter {
       case null:
         break;
       case 'circle':
-        final circle = recognized!.convertToCircle();
-        canvas.drawCircle(circle.$1, circle.$2, paint);
+        final (center, radius) = recognized!.convertToCircle();
+        canvas.drawCircle(center, radius, paint);
         break;
       case 'square':
       case 'rect':

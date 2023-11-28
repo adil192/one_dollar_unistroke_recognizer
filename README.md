@@ -40,6 +40,10 @@ switch (recognized?.name) {
     final circle = recognized!.convertToCircle();
     canvas.drawCircle(circle.$1, circle.$2, paint);
     break;
+  case 'rectangle':
+    final rect = recognized!.convertToRect();
+    canvas.drawRect(rect, paint);
+    break;
   default:
     final polygon = recognized!.convertToCanonicalPolygon();
     canvas.drawPoints(PointMode.polygon, polygon, paint);

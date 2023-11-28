@@ -1,3 +1,8 @@
+## 0.4.1
+
+* Fixed images on pub.dev.
+* Added a `RecognizedUnistroke.convertToOval()` method.
+
 ## 0.4.0
 
 * This release has changed the default set of templates to contain better shapes. The old templates are still available in `example$1Unistrokes`. The new templates are only a circle, rectangle, and triangle, where the old templates were more varied but were also sketched by hand and were not very pretty.

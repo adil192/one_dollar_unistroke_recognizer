@@ -96,7 +96,16 @@ class _Painter extends CustomPainter {
       ..drawPoints(
         PointMode.polygon,
         recognizedStroke.originalPoints,
-        paint..color = Colors.black.withOpacity(0.5),
+        paint
+          ..strokeWidth = 4
+          ..color = Colors.white.withOpacity(0.5),
+      )
+      ..drawPoints(
+        PointMode.polygon,
+        recognizedStroke.originalPoints,
+        paint
+          ..strokeWidth = 2
+          ..color = Colors.black.withOpacity(0.5),
       )
       ..drawPoints(
         PointMode.polygon,

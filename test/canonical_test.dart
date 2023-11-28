@@ -120,8 +120,8 @@ class _Painter extends CustomPainter {
 
 /// The points of an approximate circle.
 Iterable<Offset> get _approximateCircle sync* {
-  const radius = 100.0;
-  const maxVariance = 50.0;
+  const radius = 150.0;
+  const maxVariance = 100.0;
   const center = Offset(200, 200);
   const numPoints = 64;
   const t = 5 / numPoints;
@@ -145,8 +145,8 @@ Iterable<Offset> get _approximateCircle sync* {
 Iterable<Offset> get _approximateSquare {
   final rect = Rect.fromCenter(
     center: const Offset(200, 200),
-    width: 200,
-    height: 200,
+    width: 300,
+    height: 300,
   );
   final corners = [
     rect.topLeft,
@@ -161,8 +161,8 @@ Iterable<Offset> get _approximateSquare {
 Iterable<Offset> get _approximateTriangle {
   final rect = Rect.fromCenter(
     center: const Offset(200, 200),
-    width: 200,
-    height: 200,
+    width: 300,
+    height: 300,
   );
   final corners = [
     rect.topCenter,
@@ -176,7 +176,7 @@ Iterable<Offset> get _approximateTriangle {
 Iterable<Offset> _approximatePolygon(List<Offset> corners) sync* {
   assert(corners.first == corners.last);
 
-  const maxVariance = 50.0;
+  const maxVariance = 100.0;
   final numPointsPerSide = 64 / (corners.length - 1);
   final t = 5 / numPointsPerSide / (corners.length - 1);
 

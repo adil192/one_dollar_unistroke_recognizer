@@ -6,11 +6,10 @@ repository: https://github.com/adil192/one_dollar_unistroke_recognizer
 issue_tracker: https://github.com/adil192/one_dollar_unistroke_recognizer/issues
 
 topics:
-  - math
+  - one-dollar
+  - unistrokes
   - shape-recognition
   - gesture-recognition
-  - polygons
-  - unistroke
 
 environment:
   sdk: '>=3.1.0 <4.0.0'

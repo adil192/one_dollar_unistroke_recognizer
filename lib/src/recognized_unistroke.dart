@@ -69,10 +69,21 @@ class RecognizedUnistroke {
   ///
   /// This function assumes that the recognized unistroke is a circle.
   /// If it isn't, it will return the closest approximation.
+  ///
+  /// Also see [convertToOval]
   (Offset center, double radius) convertToCircle() {
     final rect = boundingBox(originalPoints);
     final radius = (rect.width + rect.height) / 4;
     return (rect.center, radius);
+  }
+
+  /// Gets the canonical oval of the recognized unistroke.
+  ///
+  /// Unlike [convertToCircle], this function does not take the
+  /// average of the width and height of the bounding box.
+  (Offset center, double radiusX, double radiusY) convertToOval() {
+    final rect = boundingBox(originalPoints);
+    return (rect.center, rect.width / 2, rect.height / 2);
   }
 
   /// Gets the bounding box of the recognized unistroke.

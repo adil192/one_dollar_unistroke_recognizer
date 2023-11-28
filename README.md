@@ -30,9 +30,10 @@ RecognizedUnistroke? recognized = recognizeUnistroke(
 #### Getting the "perfect" (canonical) shape
 
 You can get a "perfect" shape from the user's stroke by calling one of the following methods on the `RecognizedUnistroke` object:
-- `convertToCanonicalPolygon()`: Returns the closest template match, scaled and translated to match the input gesture. Note that this method returns a list of points, instead of a perfect circle or rectangle like the other methods. Shown in red in the examples below.
-- `convertToCircle()`: Returns the radius and center of the best-fit circle. Shown in blue in the examples below.
-- `convertToRect()`: Returns the `Rect` of the best-fit (bounding box) rectangle. Shown in green in the examples below.
+- `convertToCanonicalPolygon()`: Returns the closest template match, scaled and translated to match the input gesture. Note that this method returns a list of points, instead of a perfect circle or rectangle like the other methods. (Shown in red in the examples below.)
+- `convertToCircle()`: Returns the radius and center of the best-fit circle. (Shown in blue in the examples below.)
+- `convertToOval()`: The same as `convertToCircle()` but doesn't take the average of the width and height. (Not shown in the examples below.)
+- `convertToRect()`: Returns the `Rect` of the best-fit (bounding box) rectangle. (Shown in green in the examples below.)
 
 <!-- Show examples from the test/goldens folder in a table -->
 | Circle | Rectangle | Triangle |

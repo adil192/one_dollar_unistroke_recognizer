@@ -76,6 +76,13 @@ class RecognizedUnistroke<K> {
         .toList();
   }
 
+  /// Gets the canonical line of the recognized unistroke.
+  /// 
+  /// This function just returns the first and last input points.
+  (Offset start, Offset end) convertToLine() {
+    return (originalPoints.first, originalPoints.last);
+  }
+
   /// Gets the canonical circle of the recognized unistroke.
   ///
   /// This function assumes that the recognized unistroke is a circle.

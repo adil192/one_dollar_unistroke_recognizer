@@ -75,6 +75,29 @@ void main() {
         matchesGoldenFile('goldens/triangle.png'),
       );
     });
+
+    testWidgets('Line', (tester) async {
+      final recognized = recognizeUnistroke(_approximateLine.toList());
+      expect(recognized, isNotNull);
+      expect(recognized!.name, DefaultUnistrokeNames.line);
+
+      await tester.pumpWidget(Center(
+        child: SizedBox(
+          width: 400,
+          height: 400,
+          child: RepaintBoundary(
+            child: CustomPaint(
+              painter: _Painter(recognized),
+            ),
+          ),
+        ),
+      ));
+
+      await expectLater(
+        find.byType(CustomPaint),
+        matchesGoldenFile('goldens/line.png'),
+      );
+    });
   });
 }
 
@@ -89,6 +112,7 @@ class _Painter extends CustomPainter {
       ..strokeWidth = 2
       ..style = PaintingStyle.stroke;
 
+    final line = recognizedStroke.convertToLine();
     final circle = recognizedStroke.convertToCircle();
     final rect = recognizedStroke.convertToRect();
 
@@ -106,6 +130,11 @@ class _Painter extends CustomPainter {
         paint
           ..strokeWidth = 2
           ..color = Colors.black.withOpacity(0.5),
+      )
+      ..drawLine(
+        line.$1,
+        line.$2,
+        paint..color = Colors.orange,
       )
       ..drawPoints(
         PointMode.polygon,
@@ -148,6 +177,32 @@ Iterable<Offset> get _approximateCircle sync* {
     final x = center.dx + radius * math.cos(angle) + variance.dx;
     final y = center.dy + radius * math.sin(angle) + variance.dy;
     yield Offset(x, y);
+  }
+}
+
+Iterable<Offset> get _approximateLine sync* {
+  const start = Offset(50, 50);
+  const end = Offset(350, 350);
+
+  const maxVariance = 100.0;
+  const numPoints = 64;
+  const t = 5 / numPoints;
+
+  final random = math.Random(100);
+  Offset variance = Offset.zero;
+
+  for (int i = 0; i < numPoints; i++) {
+    variance = Offset(
+      variance.dx * (1 - t) + random.nextVariance(maxVariance) * t,
+      variance.dy * (1 - t) + random.nextVariance(maxVariance) * t,
+    );
+
+    yield Offset.lerp(
+      start,
+      end,
+      i / numPoints,
+    )!
+        .translate(variance.dx, variance.dy);
   }
 }
 

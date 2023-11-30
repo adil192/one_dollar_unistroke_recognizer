@@ -9,6 +9,10 @@ const _rectangle = Rect.fromLTWH(0, 0, 50, 50);
 /// The default unistroke templates provided by this package.
 final default$1Unistrokes =
     List<Unistroke<DefaultUnistrokeNames>>.unmodifiable([
+  Unistroke(DefaultUnistrokeNames.line, const [
+    Offset.zero,
+    Offset(100, 100),
+  ]),
   Unistroke(DefaultUnistrokeNames.circle, [
     for (var i = 0; i <= _circlePoints; i++)
       Offset(
@@ -33,6 +37,9 @@ final default$1Unistrokes =
 
 /// The enum of the names of the default unistrokes.
 enum DefaultUnistrokeNames {
+  /// A line
+  line,
+
   /// A circle
   circle,
 

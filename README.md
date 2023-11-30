@@ -32,19 +32,24 @@ final recognized = recognizeUnistroke(
 
 You can get a "perfect" shape from the user's stroke by calling one of the following methods on the `RecognizedUnistroke` object:
 - `convertToCanonicalPolygon()`: Returns the closest template match, scaled and translated to match the input gesture. Note that this method returns a list of points, instead of a perfect circle or rectangle like the other methods. (Shown in 🔴red in the examples below.)
+- `convertToLine()`: Returns the first and last input points. (Shown in 🟠orange in the examples below.)
 - `convertToCircle()`: Returns the radius and center of the best-fit circle. (Shown in 🔵blue in the examples below.)
 - `convertToOval()`: The same as `convertToCircle()` but doesn't take the average of the width and height. (Not shown in the examples below.)
 - `convertToRect()`: Returns the `Rect` of the best-fit (bounding box) rectangle. Tip: you can round the corners of the Rect with `RRect.fromRectAndRadius`. (Shown in 🟢green in the examples below.)
 
 <!-- Show examples from the test/goldens folder in a table -->
-| Circle | Rectangle | Triangle |
-| -- | -- | -- |
-| ![Circle](https://raw.githubusercontent.com/adil192/one_dollar_unistroke_recognizer/main/test/goldens/circle.png) | ![Rectangle](https://raw.githubusercontent.com/adil192/one_dollar_unistroke_recognizer/main/test/goldens/rectangle.png) | ![Triangle](https://raw.githubusercontent.com/adil192/one_dollar_unistroke_recognizer/main/test/goldens/triangle.png) |
+| Line | Circle | Rectangle | Triangle |
+| -- | -- | -- | -- |
+| ![Line](https://raw.githubusercontent.com/adil192/one_dollar_unistroke_recognizer/main/test/goldens/line.png) | ![Circle](https://raw.githubusercontent.com/adil192/one_dollar_unistroke_recognizer/main/test/goldens/circle.png) | ![Rectangle](https://raw.githubusercontent.com/adil192/one_dollar_unistroke_recognizer/main/test/goldens/rectangle.png) | ![Triangle](https://raw.githubusercontent.com/adil192/one_dollar_unistroke_recognizer/main/test/goldens/triangle.png) |
 
 ```dart
 final recognized = recognizeUnistroke(points);
 switch (recognized?.name) {
   case null:
+    break;
+  case DefaultUnistrokeNames.line:
+    final (start, end) = recognized!.convertToLine();
+    canvas.drawLine(start, end, paint);
     break;
   case DefaultUnistrokeNames.circle:
     final (center, radius) = recognized!.convertToCircle();

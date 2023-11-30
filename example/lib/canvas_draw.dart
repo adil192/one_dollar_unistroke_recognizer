@@ -80,6 +80,10 @@ class _CanvasDrawPainter extends CustomPainter {
     switch (recognized?.name) {
       case null:
         break;
+      case DefaultUnistrokeNames.line:
+        final (start, end) = recognized!.convertToLine();
+        canvas.drawLine(start, end, paint);
+        break;
       case DefaultUnistrokeNames.circle:
         final (center, radius) = recognized!.convertToCircle();
         canvas.drawCircle(center, radius, paint);

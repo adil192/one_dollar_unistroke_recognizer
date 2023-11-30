@@ -1,3 +1,8 @@
+## 0.5.0
+
+* `RecognizedUnistroke.name` is now using an enum instead of a string, e.g. `DefaultUnistrokeNames.circle` instead of `'circle'`. If you're using custom unistrokes, see the README for how to use the `recognizeUnistrokeOfType` method.
+* `convertToCanonicalPolygon()` now returns a correctly rotated shape (https://github.com/adil192/one_dollar_unistroke_recognizer/issues/2).
+
 ## 0.4.2
 
 * Removed colored text from README since it doesn't work on pub.dev.

@@ -66,6 +66,8 @@ class Unistroke<K> {
     var points =
         inputPoints.toList(); // copy to new list since [resample] mutates
     points = resample(points, numPoints);
+    assert(points.length == numPoints,
+        'resampled to ${points.length} but expected $numPoints');
     final radians = indicativeAngle(points);
     points = rotateBy(points, -radians);
     points = scaleTo(points, squareSize);

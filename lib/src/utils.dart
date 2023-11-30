@@ -19,6 +19,14 @@ final phi = 0.5 * (-1.0 + math.sqrt(5.0));
 /// Note that this mutates [points].
 List<Offset> resample(List<Offset> points,
     [int numPoints = Unistroke.numPoints]) {
+  // Special case for a line, just lerp between the two points.
+  if (points.length == 2) {
+    return List.generate(numPoints, (i) {
+      final t = i / (numPoints - 1);
+      return Offset.lerp(points.first, points.last, t)!;
+    });
+  }
+
   final intervalLength = pathLength(points) / (numPoints - 1);
   var currentIntervalD = 0.0;
   final newPoints = <Offset>[points.first];
@@ -43,8 +51,6 @@ List<Offset> resample(List<Offset> points,
     newPoints.add(points.last);
   }
 
-  assert(newPoints.length <= numPoints,
-      'got ${newPoints.length} points but expected <= $numPoints');
   return newPoints;
 }
 

@@ -9,9 +9,9 @@ const _rectangle = Rect.fromLTWH(0, 0, 50, 50);
 /// The default unistroke templates provided by this package.
 final default$1Unistrokes =
     List<Unistroke<DefaultUnistrokeNames>>.unmodifiable([
-  Unistroke(DefaultUnistrokeNames.line, const [
-    Offset.zero,
-    Offset(100, 100),
+  Unistroke(DefaultUnistrokeNames.line, [
+    _rectangle.centerLeft,
+    _rectangle.centerRight,
   ]),
   Unistroke(DefaultUnistrokeNames.circle, [
     for (var i = 0; i <= _circlePoints; i++)

@@ -83,22 +83,18 @@ class _CanvasDrawPainter extends CustomPainter {
       case DefaultUnistrokeNames.line:
         final (start, end) = recognized!.convertToLine();
         canvas.drawLine(start, end, paint);
-        break;
       case DefaultUnistrokeNames.circle:
         final (center, radius) = recognized!.convertToCircle();
         canvas.drawCircle(center, radius, paint);
-        break;
       case DefaultUnistrokeNames.rectangle:
         final rect = recognized!.convertToRect();
         canvas.drawRRect(
           RRect.fromRectAndRadius(rect, const Radius.circular(10)),
           paint,
         );
-        break;
       case DefaultUnistrokeNames.triangle:
         final polygon = recognized!.convertToCanonicalPolygon();
         canvas.drawPoints(PointMode.polygon, polygon, paint);
-        break;
     }
   }
 

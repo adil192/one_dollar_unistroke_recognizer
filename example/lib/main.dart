@@ -4,7 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:one_dollar_unistroke_recognizer/one_dollar_unistroke_recognizer.dart';
 import 'package:one_dollar_unistroke_recognizer_example/canvas_draw.dart';
 
-final recognized = ValueNotifier<RecognizedUnistroke<DefaultUnistrokeNames>?>(null);
+final recognized =
+    ValueNotifier<RecognizedUnistroke<DefaultUnistrokeNames>?>(null);
 Timer? pointDebounce;
 
 void main() {
@@ -29,7 +30,8 @@ class MyApp extends StatelessWidget {
               return Text(
                 recognized == null
                     ? 'Draw below to detect a shape'
-                    : 'Detected "${recognized.name}" with score ${recognized.score.toStringAsFixed(2)}',
+                    : 'Detected "${recognized.name}" with score '
+                        '${recognized.score.toStringAsFixed(2)}',
               );
             },
           ),
@@ -39,12 +41,12 @@ class MyApp extends StatelessWidget {
             Center(
               child: Card(
                 color: Colors.blue.withOpacity(0.1),
-                margin: const EdgeInsets.all(16.0),
+                margin: const EdgeInsets.all(16),
                 child: Padding(
-                  padding: const EdgeInsets.all(8.0),
+                  padding: const EdgeInsets.all(8),
                   child: Wrap(
-                    spacing: 8.0,
-                    runSpacing: 8.0,
+                    spacing: 8,
+                    runSpacing: 8,
                     children: [
                       for (final referenceUnistroke in referenceUnistrokes)
                         Chip(

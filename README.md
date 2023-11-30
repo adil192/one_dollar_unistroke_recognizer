@@ -50,11 +50,9 @@ switch (recognized?.name) {
   case DefaultUnistrokeNames.line:
     final (start, end) = recognized!.convertToLine();
     canvas.drawLine(start, end, paint);
-    break;
   case DefaultUnistrokeNames.circle:
     final (center, radius) = recognized!.convertToCircle();
     canvas.drawCircle(center, radius, paint);
-    break;
   case DefaultUnistrokeNames.rectangle:
     final rect = recognized!.convertToRect();
     if (youWantARoundedRectangle) {
@@ -65,11 +63,9 @@ switch (recognized?.name) {
     } else {
       canvas.drawRect(rect, paint);
     }
-    break;
   case DefaultUnistrokeNames.triangle:
     final polygon = recognized!.convertToCanonicalPolygon();
     canvas.drawPoints(PointMode.polygon, polygon, paint);
-    break;
 }
 ```
 

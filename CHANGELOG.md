@@ -1,3 +1,7 @@
+## 0.6.0
+
+* Added a line template, and the corresponding `RecognizedUnistroke.convertToLine()` method.
+
 ## 0.5.0
 
 * `RecognizedUnistroke.name` is now using an enum instead of a string, e.g. `DefaultUnistrokeNames.circle` instead of `'circle'`. If you're using custom unistrokes, see the README for how to use the `recognizeUnistrokeOfType` method.

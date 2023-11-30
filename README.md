@@ -33,7 +33,7 @@ You can get a "perfect" shape from the user's stroke by calling one of the follo
 - `convertToCanonicalPolygon()`: Returns the closest template match, scaled and translated to match the input gesture. Note that this method returns a list of points, instead of a perfect circle or rectangle like the other methods. (Shown in 🔴red in the examples below.)
 - `convertToCircle()`: Returns the radius and center of the best-fit circle. (Shown in 🔵blue in the examples below.)
 - `convertToOval()`: The same as `convertToCircle()` but doesn't take the average of the width and height. (Not shown in the examples below.)
-- `convertToRect()`: Returns the `Rect` of the best-fit (bounding box) rectangle. (Shown in 🟢green in the examples below.)
+- `convertToRect()`: Returns the `Rect` of the best-fit (bounding box) rectangle. Tip: you can round the corners of the Rect with `RRect.fromRectAndRadius`. (Shown in 🟢green in the examples below.)
 
 <!-- Show examples from the test/goldens folder in a table -->
 | Circle | Rectangle | Triangle |
@@ -51,7 +51,14 @@ switch (recognized?.name) {
     break;
   case 'rectangle':
     final rect = recognized!.convertToRect();
-    canvas.drawRect(rect, paint);
+    if (youWantARoundedRectangle) {
+      canvas.drawRRect(
+        RRect.fromRectAndRadius(rect, Radius.circular(10)),
+        paint,
+      );
+    } else {
+      canvas.drawRect(rect, paint);
+    }
     break;
   default:
     final polygon = recognized!.convertToCanonicalPolygon();

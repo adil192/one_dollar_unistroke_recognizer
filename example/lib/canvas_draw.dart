@@ -88,7 +88,10 @@ class _CanvasDrawPainter extends CustomPainter {
       case 'rect':
       case 'rectangle':
         final rect = recognized!.convertToRect();
-        canvas.drawRect(rect, paint);
+        canvas.drawRRect(
+          RRect.fromRectAndRadius(rect, const Radius.circular(10)),
+          paint,
+        );
         break;
       default:
         final polygon = recognized!.convertToCanonicalPolygon();

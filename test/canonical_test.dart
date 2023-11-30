@@ -117,8 +117,8 @@ class _Painter extends CustomPainter {
         circle.$2,
         paint..color = Colors.blue.withOpacity(0.5),
       )
-      ..drawRect(
-        rect,
+      ..drawRRect(
+        RRect.fromRectAndRadius(rect, const Radius.circular(10)),
         paint..color = Colors.green.withOpacity(0.5),
       );
   }

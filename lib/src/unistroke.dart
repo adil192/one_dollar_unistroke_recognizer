@@ -6,7 +6,7 @@ import 'package:one_dollar_unistroke_recognizer/src/utils.dart';
 
 /// A unistroke containing the list of [points]
 /// and optionally a [name].
-class Unistroke {
+class Unistroke<K> {
   /// Creates a [Unistroke] with the given [name].
   ///
   /// The [inputPoints] are manipulated by [processInputPoints]
@@ -23,7 +23,7 @@ class Unistroke {
   ///
   /// The name is only relevant for the [knownUnistrokes] list,
   /// and it can otherwise just be empty.
-  final String name;
+  final K? name;
 
   /// The manipulated input points.
   late final List<Offset> points;

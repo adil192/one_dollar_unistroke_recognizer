@@ -7,11 +7,12 @@ A Dart port of the $1 Unistroke Recognizer, with some additional features planne
 #### Basic usage
 
 ```dart
-List<Offset> points = [...];
-RecognizedUnistroke? recognized = recognizeUnistroke(points);
+final points = <Offset>[...];
+final recognized = recognizeUnistroke(points);
 if (recognized == null) {
   print('No match found');
 } else {
+  // e.g. DefaultUnistrokeNames.circle
   print('Stroke recognized as ${recognized.name}');
 }
 ```
@@ -21,7 +22,7 @@ if (recognized == null) {
 The Protractor enhancement is enabled by default. You can disable it by setting `useProtractor` to `false`.
 
 ```dart
-RecognizedUnistroke? recognized = recognizeUnistroke(
+final recognized = recognizeUnistroke(
   points,
   useProtractor: false,
 );
@@ -41,15 +42,15 @@ You can get a "perfect" shape from the user's stroke by calling one of the follo
 | ![Circle](https://raw.githubusercontent.com/adil192/one_dollar_unistroke_recognizer/main/test/goldens/circle.png) | ![Rectangle](https://raw.githubusercontent.com/adil192/one_dollar_unistroke_recognizer/main/test/goldens/rectangle.png) | ![Triangle](https://raw.githubusercontent.com/adil192/one_dollar_unistroke_recognizer/main/test/goldens/triangle.png) |
 
 ```dart
-RecognizedUnistroke? recognized = recognizeUnistroke(points);
+final recognized = recognizeUnistroke(points);
 switch (recognized?.name) {
   case null:
     break;
-  case 'circle':
+  case DefaultUnistrokeNames.circle:
     final (center, radius) = recognized!.convertToCircle();
     canvas.drawCircle(center, radius, paint);
     break;
-  case 'rectangle':
+  case DefaultUnistrokeNames.rectangle:
     final rect = recognized!.convertToRect();
     if (youWantARoundedRectangle) {
       canvas.drawRRect(
@@ -60,7 +61,7 @@ switch (recognized?.name) {
       canvas.drawRect(rect, paint);
     }
     break;
-  default:
+  case DefaultUnistrokeNames.triangle:
     final polygon = recognized!.convertToCanonicalPolygon();
     canvas.drawPoints(PointMode.polygon, polygon, paint);
     break;
@@ -73,27 +74,37 @@ You can recognize custom unistrokes by setting the `referenceUnistrokes` list.
 
 Note that this will disable the default unistroke templates defined in `default$1Unistrokes`.
 
+If your key type isn't `DefaultUnistrokeNames`, you'll need to call
+`recognizeUnistrokeOfType<MyKey>(...)` instead of `recognizeUnistroke()`.
+
 ```dart
-referenceUnistrokes = [
-  Unistroke('circle', [...]),
-  Unistroke('rectangle', [...]),
-  Unistroke('triangle', [...]),
-  Unistroke('leaf', [...]),
+referenceUnistrokes = <Unistroke<MyUnistrokeNames>>[
+  Unistroke(MyUnistrokeNames.circle, [...]),
+  Unistroke(MyUnistrokeNames.rectangle, [...]),
+  Unistroke(MyUnistrokeNames.triangle, [...]),
+  Unistroke(MyUnistrokeNames.leaf, [...]),
 ];
 
-RecognizedUnistroke? recognized = recognizeUnistroke(points);
+enum MyUnistrokeNames {
+  circle,
+  rectangle,
+  triangle,
+  leaf,
+}
+
+final recognized = recognizeUnistrokeOfType<MyUnistrokeNames>(points);
 ```
 
 Alternatively, you can temporarily override the `referenceUnistrokes` list for a single call to `recognizeUnistroke` by setting the `overrideReferenceUnistrokes` list.
 
 ```dart
-RecognizedUnistroke? recognized = recognizeUnistroke(
+final recognized = recognizeUnistrokeOfType<MyUnistrokeNames>(
   points,
   overrideReferenceUnistrokes: [...],
 );
 ```
 
-You could also set `referenceUnistrokes` to `example$1Unistrokes` to use the templates that were originally defined in the paper, though they're not very pretty and were probably intended to just be a proof-of-concept.
+You could also set `referenceUnistrokes` to `example$1Unistrokes` to use the templates that were originally defined in the paper, though they're not very pretty and were probably intended to just be a proof-of-concept. (The key type for `example$1Unistrokes` is `String`.)
 
 ## About the $1 Unistroke Recognizer
 

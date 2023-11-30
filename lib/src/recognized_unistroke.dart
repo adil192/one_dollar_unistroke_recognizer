@@ -9,7 +9,7 @@ import 'package:vector_math/vector_math.dart';
 /// A recognized unistroke.
 ///
 /// This is the output of [recognizeUnistroke].
-class RecognizedUnistroke {
+class RecognizedUnistroke<K> {
   /// Creates a [RecognizedUnistroke].
   const RecognizedUnistroke(
     this.name,
@@ -19,7 +19,7 @@ class RecognizedUnistroke {
   });
 
   /// The recognized unistroke name.
-  final String name;
+  final K? name;
 
   /// The score of the recognized unistroke.
   ///
@@ -32,7 +32,7 @@ class RecognizedUnistroke {
 
   /// The list of reference unistrokes
   /// that were used in [recognizeUnistroke].
-  final List<Unistroke> referenceUnistrokes;
+  final List<Unistroke<K>> referenceUnistrokes;
 
   /// Gets the canonical polygon of the recognized unistroke,
   /// and transforms it to the size and position of the original unistroke.

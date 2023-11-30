@@ -11,7 +11,7 @@ class CanvasDraw extends StatefulWidget {
     required this.onDrawEnd,
   });
 
-  final ValueNotifier<RecognizedUnistroke?> recognized;
+  final ValueNotifier<RecognizedUnistroke<DefaultUnistrokeNames>?> recognized;
   final void Function(List<Offset>) onDraw;
   final void Function(List<Offset>) onDrawEnd;
 
@@ -80,20 +80,18 @@ class _CanvasDrawPainter extends CustomPainter {
     switch (recognized?.name) {
       case null:
         break;
-      case 'circle':
+      case DefaultUnistrokeNames.circle:
         final (center, radius) = recognized!.convertToCircle();
         canvas.drawCircle(center, radius, paint);
         break;
-      case 'square':
-      case 'rect':
-      case 'rectangle':
+      case DefaultUnistrokeNames.rectangle:
         final rect = recognized!.convertToRect();
         canvas.drawRRect(
           RRect.fromRectAndRadius(rect, const Radius.circular(10)),
           paint,
         );
         break;
-      default:
+      case DefaultUnistrokeNames.triangle:
         final polygon = recognized!.convertToCanonicalPolygon();
         canvas.drawPoints(PointMode.polygon, polygon, paint);
         break;

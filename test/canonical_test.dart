@@ -10,7 +10,7 @@ void main() {
     testWidgets('Circle', (tester) async {
       final recognized = recognizeUnistroke(_approximateCircle.toList());
       expect(recognized, isNotNull);
-      expect(recognized!.name, 'circle');
+      expect(recognized!.name, DefaultUnistrokeNames.circle);
 
       await tester.pumpWidget(Center(
         child: SizedBox(
@@ -33,7 +33,7 @@ void main() {
     testWidgets('Rectangle', (tester) async {
       final recognized = recognizeUnistroke(_approximateSquare.toList());
       expect(recognized, isNotNull);
-      expect(recognized!.name, 'rectangle');
+      expect(recognized!.name, DefaultUnistrokeNames.rectangle);
 
       await tester.pumpWidget(Center(
         child: SizedBox(
@@ -56,7 +56,7 @@ void main() {
     testWidgets('Triangle', (tester) async {
       final recognized = recognizeUnistroke(_approximateTriangle.toList());
       expect(recognized, isNotNull);
-      expect(recognized!.name, 'triangle');
+      expect(recognized!.name, DefaultUnistrokeNames.triangle);
 
       await tester.pumpWidget(Center(
         child: SizedBox(
@@ -81,7 +81,7 @@ void main() {
 class _Painter extends CustomPainter {
   const _Painter(this.recognizedStroke);
 
-  final RecognizedUnistroke recognizedStroke;
+  final RecognizedUnistroke<DefaultUnistrokeNames> recognizedStroke;
 
   @override
   void paint(Canvas canvas, Size size) {

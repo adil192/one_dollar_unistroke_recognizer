@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:one_dollar_unistroke_recognizer/one_dollar_unistroke_recognizer.dart';
 import 'package:one_dollar_unistroke_recognizer_example/canvas_draw.dart';
 
-final recognized = ValueNotifier<RecognizedUnistroke?>(null);
+final recognized = ValueNotifier<RecognizedUnistroke<DefaultUnistrokeNames>?>(null);
 Timer? pointDebounce;
 
 void main() {
@@ -48,7 +48,7 @@ class MyApp extends StatelessWidget {
                     children: [
                       for (final referenceUnistroke in referenceUnistrokes)
                         Chip(
-                          label: Text(referenceUnistroke.name),
+                          label: Text('${referenceUnistroke.name}'),
                         ),
                     ],
                   ),

@@ -7,7 +7,7 @@ import 'package:one_dollar_unistroke_recognizer/src/unistroke.dart';
 ///
 /// I wouldn't recommend using these templates in a real app,
 /// since they were probably intended to just be a proof-of-concept.
-final example$1Unistrokes = List<Unistroke>.unmodifiable([
+final example$1Unistrokes = List<Unistroke<String>>.unmodifiable([
   Unistroke('triangle', const [
     Offset(137, 139),
     Offset(135, 141),

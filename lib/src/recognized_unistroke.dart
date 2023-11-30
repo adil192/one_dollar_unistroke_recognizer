@@ -1,3 +1,4 @@
+import 'dart:math' as math;
 import 'dart:ui';
 
 import 'package:flutter/foundation.dart';
@@ -52,11 +53,21 @@ class RecognizedUnistroke {
     final canonicalWidth = canonicalBoundingBox.width;
     final canonicalHeight = canonicalBoundingBox.height;
 
+    /// [Unistroke]s are transformed so that their first point
+    /// is on the left.
+    /// Compare the first point of the original polygon
+    /// to find how much we need to rotate the canonical polygon.
+    final angle = math.atan2(
+      originalPoints.first.dy - originalCenter.dy,
+      originalPoints.first.dx - originalCenter.dx,
+    );
+
     /// The transform that transforms the canonical polygon
     /// to the original polygon.
     final transform = Matrix4.identity()
       ..translate(originalCenter.dx, originalCenter.dy)
       ..scale(originalWidth / canonicalWidth, originalHeight / canonicalHeight)
+      ..rotateZ(-angle)
       ..translate(-canonicalCenter.dx, -canonicalCenter.dy);
 
     return unscaledCanonicalPolygon.points

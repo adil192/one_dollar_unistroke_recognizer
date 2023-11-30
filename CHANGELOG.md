@@ -1,3 +1,8 @@
+## 0.6.1
+
+* Improved line detection.
+* Improved the rotation of the recognized shape.
+
 ## 0.6.0
 
 * Added a line template, and the corresponding `RecognizedUnistroke.convertToLine()` method.

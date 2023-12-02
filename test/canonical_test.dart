@@ -104,7 +104,7 @@ void main() {
 class _Painter extends CustomPainter {
   const _Painter(this.recognizedStroke);
 
-  final RecognizedUnistroke<DefaultUnistrokeNames> recognizedStroke;
+  final RecognizedUnistroke recognizedStroke;
 
   @override
   void paint(Canvas canvas, Size size) {

@@ -12,7 +12,7 @@ export 'package:one_dollar_unistroke_recognizer/src/default_unistrokes.dart'
 export 'package:one_dollar_unistroke_recognizer/src/example_unistrokes.dart'
     show example$1Unistrokes;
 export 'package:one_dollar_unistroke_recognizer/src/recognized_unistroke.dart'
-    show RecognizedUnistroke;
+    show RecognizedUnistroke, RecognizedCustomUnistroke;
 
 /// The unistroke templates that can be recognized by [recognizeUnistroke].
 ///
@@ -22,13 +22,12 @@ export 'package:one_dollar_unistroke_recognizer/src/recognized_unistroke.dart'
 /// The default value is [default$1Unistrokes].
 /// See also [example$1Unistrokes],
 /// or provide your own list of unistroke templates.
-var referenceUnistrokes = default$1Unistrokes;
+List<Unistroke> referenceUnistrokes = default$1Unistrokes;
 
 /// Recognizes a unistroke from [inputPoints].
 ///
 /// If [useProtractor] is true, the Protractor algorithm is used.
 /// Otherwise, the Golden Section Search algorithm is used.
-///
 /// The Protractor algorithm is the newer algorithm and is faster.
 ///
 /// Returns null if no unistroke could be recognized, otherwise returns a
@@ -39,13 +38,29 @@ var referenceUnistrokes = default$1Unistrokes;
 /// Alternatively, you can set [overrideReferenceUnistrokes] to override
 /// [referenceUnistrokes] for this call only.
 /// If you change [referenceUnistrokes] or [overrideReferenceUnistrokes],
-/// you should call [recognizeUnistrokeOfType<K>] instead of this function.
-RecognizedUnistroke<K>? recognizeUnistroke<K extends DefaultUnistrokeNames>(
+/// you should call [recognizeCustomUnistroke] instead of this function.
+RecognizedUnistroke? recognizeUnistroke<K extends DefaultUnistrokeNames>(
   List<Offset> inputPoints, {
   bool useProtractor = true,
   List<Unistroke<K>>? overrideReferenceUnistrokes,
 }) {
-  return recognizeUnistrokeOfType<K>(
+  return recognizeCustomUnistroke<K>(
+    inputPoints,
+    useProtractor: useProtractor,
+    overrideReferenceUnistrokes: overrideReferenceUnistrokes,
+  );
+}
+
+/// Recognizes a unistroke from [inputPoints].
+///
+/// This is deprecated. Use [recognizeCustomUnistroke] instead.
+@Deprecated('Use recognizeCustomUnistroke instead')
+RecognizedCustomUnistroke<K>? recognizeUnistrokeOfType<K>(
+  List<Offset> inputPoints, {
+  bool useProtractor = true,
+  List<Unistroke<K>>? overrideReferenceUnistrokes,
+}) {
+  return recognizeCustomUnistroke<K>(
     inputPoints,
     useProtractor: useProtractor,
     overrideReferenceUnistrokes: overrideReferenceUnistrokes,
@@ -56,12 +71,13 @@ RecognizedUnistroke<K>? recognizeUnistroke<K extends DefaultUnistrokeNames>(
 ///
 /// If [useProtractor] is true, the Protractor algorithm is used.
 /// Otherwise, the Golden Section Search algorithm is used.
-///
 /// The Protractor algorithm is the newer algorithm and is faster.
 ///
-/// Returns null if no unistroke could be recognized, otherwise returns a
-/// [RecognizedUnistroke] with the recognized unistroke name and the score.
-/// The name will be one of the names of the templates in [referenceUnistrokes].
+/// Returns null if no unistroke could be recognized,
+/// otherwise returns a [RecognizedCustomUnistroke]
+/// with the recognized unistroke name and the score.
+/// The name will be one of the names of the templates in [referenceUnistrokes],
+/// and of type [K].
 ///
 /// You can set [referenceUnistrokes] to a list of your own unistroke templates
 /// if you want to recognize a different set of unistrokes.
@@ -70,7 +86,7 @@ RecognizedUnistroke<K>? recognizeUnistroke<K extends DefaultUnistrokeNames>(
 /// If you haven't changed [referenceUnistrokes] or
 /// [overrideReferenceUnistrokes], you can call [recognizeUnistroke] instead
 /// so you don't have to specify the type parameter.
-RecognizedUnistroke<K>? recognizeUnistrokeOfType<K>(
+RecognizedCustomUnistroke<K>? recognizeCustomUnistroke<K>(
   List<Offset> inputPoints, {
   bool useProtractor = true,
   List<Unistroke<K>>? overrideReferenceUnistrokes,
@@ -128,7 +144,7 @@ RecognizedUnistroke<K>? recognizeUnistrokeOfType<K>(
       : (1.0 - closestUnistrokeDist / Unistroke.squareDiagonal);
   if (score < 0) return null;
 
-  return RecognizedUnistroke<K>(
+  return RecognizedCustomUnistroke<K>(
     closestUnistroke.name,
     score,
     originalPoints: inputPoints,

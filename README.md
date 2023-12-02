@@ -76,7 +76,9 @@ You can recognize custom unistrokes by setting the `referenceUnistrokes` list.
 Note that this will disable the default unistroke templates defined in `default$1Unistrokes`.
 
 If your key type isn't `DefaultUnistrokeNames`, you'll need to call
-`recognizeUnistrokeOfType<MyKey>(...)` instead of `recognizeUnistroke()`.
+`recognizeCustomUnistroke<MyKey>(...)` instead of `recognizeUnistroke()`,
+which will return a `RecognizedCustomUnistroke<MyKey>` instead of a
+`RecognizedUnistroke`.
 
 ```dart
 referenceUnistrokes = <Unistroke<MyUnistrokeNames>>[
@@ -93,13 +95,13 @@ enum MyUnistrokeNames {
   leaf,
 }
 
-final recognized = recognizeUnistrokeOfType<MyUnistrokeNames>(points);
+final recognized = recognizeCustomUnistroke<MyUnistrokeNames>(points);
 ```
 
 Alternatively, you can temporarily override the `referenceUnistrokes` list for a single call to `recognizeUnistroke` by setting the `overrideReferenceUnistrokes` list.
 
 ```dart
-final recognized = recognizeUnistrokeOfType<MyUnistrokeNames>(
+final recognized = recognizeCustomUnistroke<MyUnistrokeNames>(
   points,
   overrideReferenceUnistrokes: [...],
 );

@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:flutter/foundation.dart';
+import 'package:one_dollar_unistroke_recognizer/src/default_unistrokes.dart';
 import 'package:one_dollar_unistroke_recognizer/src/unistroke.dart';
 import 'package:one_dollar_unistroke_recognizer/src/utils.dart';
 import 'package:vector_math/vector_math.dart';
@@ -8,9 +9,18 @@ import 'package:vector_math/vector_math.dart';
 /// A recognized unistroke.
 ///
 /// This is the output of [recognizeUnistroke].
-class RecognizedUnistroke<K> {
-  /// Creates a [RecognizedUnistroke].
-  const RecognizedUnistroke(
+///
+/// See also [RecognizedCustomUnistroke], which is the same as this class
+/// but with a custom key type.
+typedef RecognizedUnistroke<K extends DefaultUnistrokeNames>
+    = RecognizedCustomUnistroke<DefaultUnistrokeNames>;
+
+/// A recognized unistroke, with a custom key type.
+///
+/// This is the output of [recognizeCustomUnistroke].
+class RecognizedCustomUnistroke<K> {
+  /// Creates a [RecognizedCustomUnistroke].
+  const RecognizedCustomUnistroke(
     this.name,
     this.score, {
     required this.originalPoints,

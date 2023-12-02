@@ -1,6 +1,6 @@
 name: one_dollar_unistroke_recognizer
 description: The $1 Unistroke Recognizer, a 2D single-stroke recognizer. This is a Dart port of the original JavaScript implementation.
-version: 0.6.1
+version: 0.7.0
 homepage: https://adil192.github.io/one_dollar_unistroke_recognizer/
 repository: https://github.com/adil192/one_dollar_unistroke_recognizer
 issue_tracker: https://github.com/adil192/one_dollar_unistroke_recognizer/issues

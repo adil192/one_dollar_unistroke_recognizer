@@ -1,3 +1,8 @@
+## 0.7.0
+
+* Removed the type parameter from `RecognizedUnistroke`. Custom types will now use the `RecognizedCustomUnistroke<K>` type.
+* `recognizeUnistrokeOfType` has been renamed to `recognizeCustomUnistroke`.
+
 ## 0.6.1
 
 * Improved line detection.

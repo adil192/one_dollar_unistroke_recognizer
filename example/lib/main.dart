@@ -5,7 +5,7 @@ import 'package:one_dollar_unistroke_recognizer/one_dollar_unistroke_recognizer.
 import 'package:one_dollar_unistroke_recognizer_example/canvas_draw.dart';
 
 final recognized =
-    ValueNotifier<RecognizedUnistroke<DefaultUnistrokeNames>?>(null);
+    ValueNotifier<RecognizedUnistroke?>(null);
 Timer? pointDebounce;
 
 void main() {

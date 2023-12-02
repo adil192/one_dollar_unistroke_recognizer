@@ -11,7 +11,7 @@ class CanvasDraw extends StatefulWidget {
     required this.onDrawEnd,
   });
 
-  final ValueNotifier<RecognizedUnistroke<DefaultUnistrokeNames>?> recognized;
+  final ValueNotifier<RecognizedUnistroke?> recognized;
   final void Function(List<Offset>) onDraw;
   final void Function(List<Offset>) onDrawEnd;
 

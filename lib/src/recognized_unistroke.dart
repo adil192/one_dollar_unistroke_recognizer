@@ -12,8 +12,7 @@ import 'package:vector_math/vector_math.dart';
 ///
 /// See also [RecognizedCustomUnistroke], which is the same as this class
 /// but with a custom key type.
-typedef RecognizedUnistroke<K extends DefaultUnistrokeNames>
-    = RecognizedCustomUnistroke<DefaultUnistrokeNames>;
+typedef RecognizedUnistroke = RecognizedCustomUnistroke<DefaultUnistrokeNames>;
 
 /// A recognized unistroke, with a custom key type.
 ///

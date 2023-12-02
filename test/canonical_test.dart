@@ -7,96 +7,118 @@ import 'package:one_dollar_unistroke_recognizer/one_dollar_unistroke_recognizer.
 
 void main() {
   group('Canonical', () {
-    testWidgets('Circle', (tester) async {
-      final recognized = recognizeUnistroke(_approximateCircle.toList());
-      expect(recognized, isNotNull);
-      expect(recognized!.name, DefaultUnistrokeNames.circle);
+    group('Circle', () {
+      for (bool hq in [false, true]) {
+        testWidgets(hq ? 'HQ' : 'LQ', (tester) async {
+          final recognized =
+              recognizeUnistroke(_approximateCircle(hq).toList());
+          expect(recognized, isNotNull);
+          expect(recognized!.name, DefaultUnistrokeNames.circle);
 
-      await tester.pumpWidget(Center(
-        child: SizedBox(
-          width: 400,
-          height: 400,
-          child: RepaintBoundary(
-            child: CustomPaint(
-              painter: _Painter(recognized),
+          await tester.pumpWidget(Center(
+            child: SizedBox(
+              width: 400,
+              height: 400,
+              child: RepaintBoundary(
+                child: CustomPaint(
+                  painter: _Painter(recognized),
+                ),
+              ),
             ),
-          ),
-        ),
-      ));
+          ));
 
-      await expectLater(
-        find.byType(CustomPaint),
-        matchesGoldenFile('goldens/circle.png'),
-      );
+          await expectLater(
+            find.byType(CustomPaint),
+            matchesGoldenFile(
+                hq ? 'goldens/circle_hq.png' : 'goldens/circle.png'),
+          );
+        });
+      }
     });
 
-    testWidgets('Rectangle', (tester) async {
-      final recognized = recognizeUnistroke(_approximateSquare.toList());
-      expect(recognized, isNotNull);
-      expect(recognized!.name, DefaultUnistrokeNames.rectangle);
+    group('Rectangle', () {
+      for (bool hq in [false, true]) {
+        testWidgets(hq ? 'HQ' : 'LQ', (tester) async {
+          final recognized =
+              recognizeUnistroke(_approximateSquare(hq).toList());
+          expect(recognized, isNotNull);
+          expect(recognized!.name, DefaultUnistrokeNames.rectangle);
 
-      await tester.pumpWidget(Center(
-        child: SizedBox(
-          width: 400,
-          height: 400,
-          child: RepaintBoundary(
-            child: CustomPaint(
-              painter: _Painter(recognized),
+          await tester.pumpWidget(Center(
+            child: SizedBox(
+              width: 400,
+              height: 400,
+              child: RepaintBoundary(
+                child: CustomPaint(
+                  painter: _Painter(recognized),
+                ),
+              ),
             ),
-          ),
-        ),
-      ));
+          ));
 
-      await expectLater(
-        find.byType(CustomPaint),
-        matchesGoldenFile('goldens/rectangle.png'),
-      );
+          await expectLater(
+            find.byType(CustomPaint),
+            matchesGoldenFile(
+                hq ? 'goldens/rectangle_hq.png' : 'goldens/rectangle.png'),
+          );
+        });
+      }
     });
 
-    testWidgets('Triangle', (tester) async {
-      final recognized = recognizeUnistroke(_approximateTriangle.toList());
-      expect(recognized, isNotNull);
-      expect(recognized!.name, DefaultUnistrokeNames.triangle);
+    group('Triangle', () {
+      for (bool hq in [false, true]) {
+        testWidgets(hq ? 'HQ' : 'LQ', (tester) async {
+          final recognized =
+              recognizeUnistroke(_approximateTriangle(hq).toList());
+          expect(recognized, isNotNull);
+          expect(recognized!.name, DefaultUnistrokeNames.triangle);
 
-      await tester.pumpWidget(Center(
-        child: SizedBox(
-          width: 400,
-          height: 400,
-          child: RepaintBoundary(
-            child: CustomPaint(
-              painter: _Painter(recognized),
+          await tester.pumpWidget(Center(
+            child: SizedBox(
+              width: 400,
+              height: 400,
+              child: RepaintBoundary(
+                child: CustomPaint(
+                  painter: _Painter(recognized),
+                ),
+              ),
             ),
-          ),
-        ),
-      ));
+          ));
 
-      await expectLater(
-        find.byType(CustomPaint),
-        matchesGoldenFile('goldens/triangle.png'),
-      );
+          await expectLater(
+            find.byType(CustomPaint),
+            matchesGoldenFile(
+                hq ? 'goldens/triangle_hq.png' : 'goldens/triangle.png'),
+          );
+        });
+      }
     });
 
-    testWidgets('Line', (tester) async {
-      final recognized = recognizeUnistroke(_approximateLine.toList());
-      expect(recognized, isNotNull);
-      expect(recognized!.name, DefaultUnistrokeNames.line);
+    group('Line', () {
+      for (bool hq in [false, true]) {
+        testWidgets(hq ? 'HQ' : 'LQ', (tester) async {
+          final recognized = recognizeUnistroke(_approximateLine(hq).toList());
+          expect(recognized, isNotNull);
+          expect(recognized!.name, DefaultUnistrokeNames.line);
 
-      await tester.pumpWidget(Center(
-        child: SizedBox(
-          width: 400,
-          height: 400,
-          child: RepaintBoundary(
-            child: CustomPaint(
-              painter: _Painter(recognized),
+          await tester.pumpWidget(Center(
+            child: SizedBox(
+              width: 400,
+              height: 400,
+              child: RepaintBoundary(
+                child: CustomPaint(
+                  painter: _Painter(recognized),
+                ),
+              ),
             ),
-          ),
-        ),
-      ));
+          ));
 
-      await expectLater(
-        find.byType(CustomPaint),
-        matchesGoldenFile('goldens/line.png'),
-      );
+          await expectLater(
+            find.byType(CustomPaint),
+            matchesGoldenFile(hq ? 'goldens/line_hq.png' : 'goldens/line.png'),
+          );
+        });
+      }
     });
   });
 }
@@ -156,13 +178,16 @@ class _Painter extends CustomPainter {
   bool shouldRepaint(covariant CustomPainter oldDelegate) => false;
 }
 
+int _numPoints(bool hq) => hq ? 512 : 64;
+double _maxVariance(bool hq) => hq ? 500.0 : 100.0;
+
 /// The points of an approximate circle.
-Iterable<Offset> get _approximateCircle sync* {
+Iterable<Offset> _approximateCircle(bool hq) sync* {
   const radius = 150.0;
-  const maxVariance = 100.0;
+  final maxVariance = _maxVariance(hq);
   const center = Offset(200, 200);
-  const numPoints = 64;
-  const t = 5 / numPoints;
+  final numPoints = _numPoints(hq);
+  final t = 5 / numPoints;
 
   final random = math.Random(100);
   Offset variance = Offset.zero;
@@ -180,13 +205,13 @@ Iterable<Offset> get _approximateCircle sync* {
   }
 }
 
-Iterable<Offset> get _approximateLine sync* {
+Iterable<Offset> _approximateLine(bool hq) sync* {
   const start = Offset(50, 50);
   const end = Offset(350, 350);
 
-  const maxVariance = 100.0;
-  const numPoints = 64;
-  const t = 5 / numPoints;
+  final maxVariance = _maxVariance(hq);
+  final numPoints = _numPoints(hq);
+  final t = 5 / numPoints;
 
   final random = math.Random(100);
   Offset variance = Offset.zero;
@@ -206,7 +231,7 @@ Iterable<Offset> get _approximateLine sync* {
   }
 }
 
-Iterable<Offset> get _approximateSquare {
+Iterable<Offset> _approximateSquare(bool hq) {
   final rect = Rect.fromCenter(
     center: const Offset(200, 200),
     width: 300,
@@ -219,10 +244,10 @@ Iterable<Offset> get _approximateSquare {
     rect.bottomLeft,
     rect.topLeft,
   ];
-  return _approximatePolygon(corners);
+  return _approximatePolygon(corners, hq);
 }
 
-Iterable<Offset> get _approximateTriangle {
+Iterable<Offset> _approximateTriangle(bool hq) {
   final rect = Rect.fromCenter(
     center: const Offset(200, 200),
     width: 300,
@@ -234,14 +259,14 @@ Iterable<Offset> get _approximateTriangle {
     rect.bottomLeft,
     rect.topCenter,
   ];
-  return _approximatePolygon(corners);
+  return _approximatePolygon(corners, hq);
 }
 
-Iterable<Offset> _approximatePolygon(List<Offset> corners) sync* {
+Iterable<Offset> _approximatePolygon(List<Offset> corners, bool hq) sync* {
   assert(corners.first == corners.last);
 
-  const maxVariance = 100.0;
-  final numPointsPerSide = 64 / (corners.length - 1);
+  final maxVariance = _maxVariance(hq);
+  final numPointsPerSide = _numPoints(hq) / (corners.length - 1);
   final t = 5 / numPointsPerSide / (corners.length - 1);
 
   final random = math.Random(100);

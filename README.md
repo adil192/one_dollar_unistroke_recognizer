@@ -41,6 +41,7 @@ You can get a "perfect" shape from the user's stroke by calling one of the follo
 | Line | Circle | Rectangle | Triangle |
 | -- | -- | -- | -- |
 | ![Line](https://raw.githubusercontent.com/adil192/one_dollar_unistroke_recognizer/main/test/goldens/line.png) | ![Circle](https://raw.githubusercontent.com/adil192/one_dollar_unistroke_recognizer/main/test/goldens/circle.png) | ![Rectangle](https://raw.githubusercontent.com/adil192/one_dollar_unistroke_recognizer/main/test/goldens/rectangle.png) | ![Triangle](https://raw.githubusercontent.com/adil192/one_dollar_unistroke_recognizer/main/test/goldens/triangle.png) |
+| ![Line HQ](https://raw.githubusercontent.com/adil192/one_dollar_unistroke_recognizer/main/test/goldens/line_hq.png) | ![Circle HQ](https://raw.githubusercontent.com/adil192/one_dollar_unistroke_recognizer/main/test/goldens/circle_hq.png) | ![Rectangle HQ](https://raw.githubusercontent.com/adil192/one_dollar_unistroke_recognizer/main/test/goldens/rectangle_hq.png) | ![Triangle HQ](https://raw.githubusercontent.com/adil192/one_dollar_unistroke_recognizer/main/test/goldens/triangle_hq.png) |
 
 ```dart
 final recognized = recognizeUnistroke(points);

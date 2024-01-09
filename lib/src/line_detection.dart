@@ -8,7 +8,10 @@ class Line {
   // ignore: public_member_api_docs
   Line(this.start, this.end);
 
+  /// The start point of the line.
   final Offset start;
+
+  /// The end point of the line.
   final Offset end;
 
   /// The [a] in the equation [ax + by + c = 0].

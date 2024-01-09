@@ -81,22 +81,24 @@ If your key type isn't `DefaultUnistrokeNames`, you'll need to call
 which will return a `RecognizedCustomUnistroke<MyKey>` instead of a
 `RecognizedUnistroke`.
 
-
+Also note that straight lines are a special case in the default unistroke templates,
+and aren't available by default with custom unistroke templates.
+To recognize straight lines, see the [Straight lines](#straight-lines) section below.
 
 ```dart
-referenceUnistrokes = <Unistroke<MyUnistrokeNames>>[
-  Unistroke(MyUnistrokeNames.circle, [...]),
-  Unistroke(MyUnistrokeNames.rectangle, [...]),
-  Unistroke(MyUnistrokeNames.triangle, [...]),
-  Unistroke(MyUnistrokeNames.leaf, [...]),
-];
-
 enum MyUnistrokeNames {
   circle,
   rectangle,
   triangle,
   leaf,
 }
+
+referenceUnistrokes = <Unistroke<MyUnistrokeNames>>[
+  Unistroke(MyUnistrokeNames.circle, [...]),
+  Unistroke(MyUnistrokeNames.rectangle, [...]),
+  Unistroke(MyUnistrokeNames.triangle, [...]),
+  Unistroke(MyUnistrokeNames.leaf, [...]),
+];
 
 final recognized = recognizeCustomUnistroke<MyUnistrokeNames>(points);
 ```
@@ -111,6 +113,36 @@ final recognized = recognizeCustomUnistroke<MyUnistrokeNames>(
 ```
 
 You could also set `referenceUnistrokes` to `example$1Unistrokes` to use the templates that were originally defined in the paper, though they're not very pretty and were probably intended to just be a proof-of-concept. (The key type for `example$1Unistrokes` is `String`.)
+
+#### Straight lines
+
+Straight lines are a special case in the default unistroke templates,
+in that they're best recognized by a different algorithm than the other shapes (i.e. not $1).
+
+If you're using `default$1Unistrokes` (the default), you don't need to worry about this, and straight lines will be detected as `DefaultUnistrokeNames.line`.
+
+But if you're using custom unistroke templates, you'll need to specify the `name` of the straight line unistroke template.
+I still recommend that you provide a sensible points list for the line template, but it won't be used for the detection itself.
+
+```dart
+enum MyUnistrokeNames {
+  line,
+  // ...
+}
+
+referenceUnistrokes = <Unistroke<MyUnistrokeNames>>[
+  Unistroke(MyUnistrokeNames.line, [
+    Offset(50, 0),
+    Offset(50, 100),
+  ]),
+  // ...
+];
+
+final recognized = recognizeCustomUnistroke<MyUnistrokeNames>(
+  points,
+  straightLineName: MyUnistrokeNames.line,
+);
+```
 
 ## About the $1 Unistroke Recognizer
 

@@ -87,10 +87,17 @@ RecognizedCustomUnistroke<K>? recognizeUnistrokeOfType<K>(
 /// If you haven't changed [referenceUnistrokes] or
 /// [overrideReferenceUnistrokes], you can call [recognizeUnistroke] instead
 /// so you don't have to specify the type parameter.
+///
+/// If you're using custom unistroke templates,
+/// and you need straight line detection,
+/// please set [straightLineName] to the name of the straight line template.
+/// This is needed since straight lines are best recognized with
+/// a different algorithm than the standard $1 algorithm.
 RecognizedCustomUnistroke<K>? recognizeCustomUnistroke<K>(
   List<Offset> inputPoints, {
   bool useProtractor = true,
   List<Unistroke<K>>? overrideReferenceUnistrokes,
+  K? straightLineName,
 }) {
   // Not enough points to recognize
   if (inputPoints.length < Unistroke.numPoints) return null;
@@ -104,7 +111,8 @@ RecognizedCustomUnistroke<K>? recognizeCustomUnistroke<K>(
   for (final unistrokeTemplate
       in (overrideReferenceUnistrokes ?? referenceUnistrokes)) {
     final double distance;
-    if (unistrokeTemplate.name == DefaultUnistrokeNames.line) {
+    if (unistrokeTemplate.name ==
+        (straightLineName ?? DefaultUnistrokeNames.line)) {
       distance = meanAbsoluteError(
         inputPoints,
         useProtractor: useProtractor,

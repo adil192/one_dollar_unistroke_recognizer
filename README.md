@@ -1,4 +1,7 @@
-A Dart port of the $1 Unistroke Recognizer, with some additional features planned.
+A Dart port of the $1 Unistroke Recognizer, including the Protractor enhancement, with some additional features.
+
+By default it recognizes lines, circles, rectangles, and triangles.
+But you can also recognize any custom unistrokes (see below).
 
 [![Pub](https://img.shields.io/pub/v/one_dollar_unistroke_recognizer.svg)](https://pub.dev/packages/one_dollar_unistroke_recognizer)
 

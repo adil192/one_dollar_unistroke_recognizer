@@ -37,6 +37,7 @@ final default$1Unistrokes =
 ]);
 
 /// The enum of the names of the default unistrokes.
+// If you add a new unistroke name, you should also add it to the README.
 enum DefaultUnistrokeNames {
   /// A line.
   ///

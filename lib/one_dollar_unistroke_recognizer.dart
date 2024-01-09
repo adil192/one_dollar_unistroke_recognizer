@@ -114,7 +114,7 @@ RecognizedCustomUnistroke<K>? recognizeCustomUnistroke<K>(
     if (unistrokeTemplate.name ==
         (straightLineName ?? DefaultUnistrokeNames.line)) {
       distance = meanAbsoluteError(
-        inputPoints,
+        candidate.points,
         useProtractor: useProtractor,
       );
     } else if (useProtractor) {

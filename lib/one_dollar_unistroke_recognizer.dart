@@ -3,6 +3,7 @@ library one_dollar_unistroke_recognizer;
 import 'dart:ui' show Offset;
 
 import 'package:one_dollar_unistroke_recognizer/src/default_unistrokes.dart';
+import 'package:one_dollar_unistroke_recognizer/src/line_detection.dart';
 import 'package:one_dollar_unistroke_recognizer/src/recognized_unistroke.dart';
 import 'package:one_dollar_unistroke_recognizer/src/unistroke.dart';
 import 'package:one_dollar_unistroke_recognizer/src/utils.dart';
@@ -86,10 +87,17 @@ RecognizedCustomUnistroke<K>? recognizeUnistrokeOfType<K>(
 /// If you haven't changed [referenceUnistrokes] or
 /// [overrideReferenceUnistrokes], you can call [recognizeUnistroke] instead
 /// so you don't have to specify the type parameter.
+///
+/// If you're using custom unistroke templates,
+/// and you need straight line detection,
+/// please set [straightLineName] to the name of the straight line template.
+/// This is needed since straight lines are best recognized with
+/// a different algorithm than the standard $1 algorithm.
 RecognizedCustomUnistroke<K>? recognizeCustomUnistroke<K>(
   List<Offset> inputPoints, {
   bool useProtractor = true,
   List<Unistroke<K>>? overrideReferenceUnistrokes,
+  K? straightLineName,
 }) {
   // Not enough points to recognize
   if (inputPoints.length < Unistroke.numPoints) return null;
@@ -102,18 +110,28 @@ RecognizedCustomUnistroke<K>? recognizeCustomUnistroke<K>(
   assert((overrideReferenceUnistrokes ?? referenceUnistrokes).isNotEmpty);
   for (final unistrokeTemplate
       in (overrideReferenceUnistrokes ?? referenceUnistrokes)) {
-    final distance = useProtractor
-        ? optimalCosineDistance(
-            unistrokeTemplate.vector,
-            candidate.vector,
-          )
-        : distanceAtBestAngle(
-            candidate.points,
-            unistrokeTemplate.points,
-            -angleRange,
-            angleRange,
-            anglePrecision,
-          );
+    final double distance;
+    if (unistrokeTemplate.name ==
+        (straightLineName ?? DefaultUnistrokeNames.line)) {
+      final mae = meanAbsoluteError(
+        candidate.points,
+      );
+      distance = useProtractor ? mae / Unistroke.squareDiagonal : mae;
+    } else if (useProtractor) {
+      distance = optimalCosineDistance(
+        unistrokeTemplate.vector,
+        candidate.vector,
+      );
+    } else {
+      distance = distanceAtBestAngle(
+        candidate.points,
+        unistrokeTemplate.points,
+        -angleRange,
+        angleRange,
+        anglePrecision,
+      );
+    }
+
     if (distance < closestUnistrokeDist) {
       closestUnistrokeDist = distance;
       closestUnistroke = unistrokeTemplate;

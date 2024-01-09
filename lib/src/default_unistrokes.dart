@@ -1,6 +1,7 @@
 import 'dart:math';
 import 'dart:ui' show Offset, Rect;
 
+import 'package:one_dollar_unistroke_recognizer/src/line_detection.dart';
 import 'package:one_dollar_unistroke_recognizer/src/unistroke.dart';
 
 const _circlePoints = 32;
@@ -37,7 +38,12 @@ final default$1Unistrokes =
 
 /// The enum of the names of the default unistrokes.
 enum DefaultUnistrokeNames {
-  /// A line
+  /// A line.
+  ///
+  /// Note that the line unistroke in default$1Unistrokes is just for
+  /// completeness,
+  /// but we use a different algorithm to recognize straight lines:
+  /// see [meanAbsoluteError].
   line,
 
   /// A circle

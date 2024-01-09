@@ -1,3 +1,10 @@
+## 1.0.0
+
+* Used a better algorithm ([MAE](https://en.m.wikipedia.org/wiki/Mean_absolute_error))
+  for detecting straight lines ([#3](https://github.com/adil192/one_dollar_unistroke_recognizer/pull/3)).
+  This fixes the issue where lines would often be incorrectly detected as a circle
+  ([saber-notes/saber#1039](https://github.com/saber-notes/saber/issues/1039)).
+
 ## 0.7.0
 
 * Removed the type parameter from `RecognizedUnistroke`. Custom types will now use the `RecognizedCustomUnistroke<K>` type.

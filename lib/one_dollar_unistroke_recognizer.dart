@@ -113,9 +113,10 @@ RecognizedCustomUnistroke<K>? recognizeCustomUnistroke<K>(
     final double distance;
     if (unistrokeTemplate.name ==
         (straightLineName ?? DefaultUnistrokeNames.line)) {
-      distance = meanAbsoluteError(
+      final mae = meanAbsoluteError(
         candidate.points,
       );
+      distance = useProtractor ? mae / Unistroke.squareDiagonal : mae;
     } else if (useProtractor) {
       distance = optimalCosineDistance(
         unistrokeTemplate.vector,

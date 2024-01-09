@@ -115,7 +115,6 @@ RecognizedCustomUnistroke<K>? recognizeCustomUnistroke<K>(
         (straightLineName ?? DefaultUnistrokeNames.line)) {
       distance = meanAbsoluteError(
         candidate.points,
-        useProtractor: useProtractor,
       );
     } else if (useProtractor) {
       distance = optimalCosineDistance(

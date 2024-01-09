@@ -38,19 +38,11 @@ class Line {
 /// and the line between the first and last point.
 ///
 /// See https://en.m.wikipedia.org/wiki/Mean_absolute_error.
-///
-/// If [useProtractor] is false,
-/// the mean isn't taken, and the sum of the absolute errors is returned.
-/// This is to match the expected output of a Golden Section Search.
-double meanAbsoluteError(
-  List<Offset> inputPoints, {
-  bool useProtractor = true,
-}) {
+double meanAbsoluteError(List<Offset> inputPoints) {
   final line = Line(inputPoints.first, inputPoints.last);
   final sumAbsoluteError = inputPoints
       .map((point) => line.distanceToPoint(point))
       .reduce((a, b) => a + b);
-  return useProtractor
-      ? sumAbsoluteError / inputPoints.length
-      : sumAbsoluteError;
+  final meanAbsoluteError = sumAbsoluteError / inputPoints.length;
+  return meanAbsoluteError;
 }

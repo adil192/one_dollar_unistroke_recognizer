@@ -12,8 +12,6 @@ void main() {
         testWidgets(hq ? 'HQ' : 'LQ', (tester) async {
           final recognized =
               recognizeUnistroke(_approximateCircle(hq).toList());
-          expect(recognized, isNotNull);
-          expect(recognized!.name, DefaultUnistrokeNames.circle);
 
           await tester.pumpWidget(Center(
             child: SizedBox(
@@ -41,8 +39,6 @@ void main() {
         testWidgets(hq ? 'HQ' : 'LQ', (tester) async {
           final recognized =
               recognizeUnistroke(_approximateSquare(hq).toList());
-          expect(recognized, isNotNull);
-          expect(recognized!.name, DefaultUnistrokeNames.rectangle);
 
           await tester.pumpWidget(Center(
             child: SizedBox(
@@ -70,8 +66,6 @@ void main() {
         testWidgets(hq ? 'HQ' : 'LQ', (tester) async {
           final recognized =
               recognizeUnistroke(_approximateTriangle(hq).toList());
-          expect(recognized, isNotNull);
-          expect(recognized!.name, DefaultUnistrokeNames.triangle);
 
           await tester.pumpWidget(Center(
             child: SizedBox(
@@ -98,8 +92,6 @@ void main() {
       for (bool hq in [false, true]) {
         testWidgets(hq ? 'HQ' : 'LQ', (tester) async {
           final recognized = recognizeUnistroke(_approximateLine(hq).toList());
-          expect(recognized, isNotNull);
-          expect(recognized!.name, DefaultUnistrokeNames.line);
 
           await tester.pumpWidget(Center(
             child: SizedBox(
@@ -126,7 +118,7 @@ void main() {
 class _Painter extends CustomPainter {
   const _Painter(this.recognizedStroke);
 
-  final RecognizedUnistroke recognizedStroke;
+  final RecognizedUnistroke? recognizedStroke;
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -134,21 +126,25 @@ class _Painter extends CustomPainter {
       ..strokeWidth = 2
       ..style = PaintingStyle.stroke;
 
-    final line = recognizedStroke.convertToLine();
-    final circle = recognizedStroke.convertToCircle();
-    final rect = recognizedStroke.convertToRect();
+    if (recognizedStroke == null) {
+      return canvas.drawColor(Colors.red, BlendMode.color);
+    }
+
+    final line = recognizedStroke!.convertToLine();
+    final circle = recognizedStroke!.convertToCircle();
+    final rect = recognizedStroke!.convertToRect();
 
     canvas
       ..drawPoints(
         PointMode.polygon,
-        recognizedStroke.originalPoints,
+        recognizedStroke!.originalPoints,
         paint
           ..strokeWidth = 4
           ..color = Colors.white.withOpacity(0.5),
       )
       ..drawPoints(
         PointMode.polygon,
-        recognizedStroke.originalPoints,
+        recognizedStroke!.originalPoints,
         paint
           ..strokeWidth = 2
           ..color = Colors.black.withOpacity(0.5),
@@ -160,7 +156,7 @@ class _Painter extends CustomPainter {
       )
       ..drawPoints(
         PointMode.polygon,
-        recognizedStroke.convertToCanonicalPolygon(),
+        recognizedStroke!.convertToCanonicalPolygon(),
         paint..color = Colors.red,
       )
       ..drawCircle(

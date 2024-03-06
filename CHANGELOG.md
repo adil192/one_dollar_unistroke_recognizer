@@ -1,3 +1,7 @@
+## 1.1.0
+
+* Separated the logic for straight lines and for other shapes to fix the issue where arbitrary strokes would often be incorrectly detected as a line.
+
 ## 1.0.0
 
 * Used a better algorithm ([MAE](https://en.m.wikipedia.org/wiki/Mean_absolute_error))

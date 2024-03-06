@@ -107,31 +107,32 @@ RecognizedCustomUnistroke<K>? recognizeCustomUnistroke<K>(
   Unistroke? closestUnistroke;
   var closestUnistrokeDist = double.infinity;
 
-  assert((overrideReferenceUnistrokes ?? referenceUnistrokes).isNotEmpty);
   for (final unistrokeTemplate
       in (overrideReferenceUnistrokes ?? referenceUnistrokes)) {
-    final double distance;
     if (unistrokeTemplate.name ==
         (straightLineName ?? DefaultUnistrokeNames.line)) {
-      final mae = meanAbsoluteError(
-        candidate.points,
-      );
-      distance = useProtractor ? mae / Unistroke.squareDiagonal : mae;
-    } else if (useProtractor) {
-      distance = optimalCosineDistance(
-        unistrokeTemplate.vector,
-        candidate.vector,
-      );
-    } else {
-      distance = distanceAtBestAngle(
-        candidate.points,
-        unistrokeTemplate.points,
-        -angleRange,
-        angleRange,
-        anglePrecision,
-      );
+      final mae = meanAbsoluteError(candidate.pointsWithAspectRatioPreserved);
+      const threshold = Unistroke.squareSize * 0.1;
+      if (mae > threshold) continue;
+
+      closestUnistroke = unistrokeTemplate;
+      closestUnistrokeDist =
+          useProtractor ? mae / Unistroke.squareDiagonal : mae;
+      break;
     }
 
+    final distance = useProtractor
+        ? optimalCosineDistance(
+            unistrokeTemplate.vector,
+            candidate.vector,
+          )
+        : distanceAtBestAngle(
+            candidate.points,
+            unistrokeTemplate.points,
+            -angleRange,
+            angleRange,
+            anglePrecision,
+          );
     if (distance < closestUnistrokeDist) {
       closestUnistrokeDist = distance;
       closestUnistroke = unistrokeTemplate;

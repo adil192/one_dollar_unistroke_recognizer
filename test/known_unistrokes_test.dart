@@ -2,10 +2,13 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:one_dollar_unistroke_recognizer/one_dollar_unistroke_recognizer.dart';
 
 void main() {
-  group('known unistrokes should be recognized', () {
+  group('recognizing templates', () {
     for (final useProtractor in [false, true]) {
       for (final reversed in [false, true]) {
         for (final unistroke in default$1Unistrokes) {
+          // The line template is tested in straight_lines_test.dart
+          if (unistroke.name == DefaultUnistrokeNames.line) continue;
+
           test(
             '${unistroke.name} (useProtractor: $useProtractor, '
             'reversed: $reversed)',

@@ -13,11 +13,9 @@ class Unistroke<K> {
   /// before being stored in [points] and [vector].
   Unistroke(
     this.name,
-    Iterable<Offset> inputPoints, {
+    this.inputPoints, {
     this.isCanonical = false,
-  }) {
-    points = processInputPoints(inputPoints);
-  }
+  });
 
   /// The name describing the unistroke.
   ///
@@ -25,8 +23,18 @@ class Unistroke<K> {
   /// and it can otherwise just be empty.
   final K? name;
 
+  /// The raw input points.
+  @visibleForTesting
+  final List<Offset> inputPoints;
+
   /// The manipulated input points.
-  late final List<Offset> points;
+  late final points = processInputPoints(inputPoints);
+
+  /// The manipulated input points with aspect ratio preserved.
+  ///
+  /// This is best suited for detecting straight lines.
+  late final pointsWithAspectRatioPreserved =
+      processInputPoints(inputPoints, preserveAspectRatio: true);
 
   /// The vectorized version of [points],
   /// used for the Protractor algorithm.
@@ -62,7 +70,10 @@ class Unistroke<K> {
   /// The [points] are resampled, rotated, scaled and translated
   /// to match the [Unistroke.numPoints] and [Unistroke.squareSize] constants.
   @visibleForTesting
-  static List<Offset> processInputPoints(Iterable<Offset> inputPoints) {
+  static List<Offset> processInputPoints(
+    Iterable<Offset> inputPoints, {
+    bool preserveAspectRatio = false,
+  }) {
     var points =
         inputPoints.toList(); // copy to new list since [resample] mutates
     points = resample(points, numPoints);
@@ -70,7 +81,8 @@ class Unistroke<K> {
         'resampled to ${points.length} but expected $numPoints');
     final radians = indicativeAngle(points);
     points = rotateBy(points, -radians);
-    points = scaleTo(points, squareSize);
+    points = scaleTo(points,
+        squareSize: squareSize, preserveAspectRatio: preserveAspectRatio);
     points = translateTo(points, Offset.zero);
     return points;
   }

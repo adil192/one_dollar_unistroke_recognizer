@@ -77,13 +77,21 @@ List<Offset> rotateBy(List<Offset> points, double radians) {
 /// Scales [points] to [squareSize].
 ///
 /// Non-uniform scale; assumes 2D gestures (i.e., no lines).
-List<Offset> scaleTo(List<Offset> points,
-    [double squareSize = Unistroke.squareSize]) {
+List<Offset> scaleTo(
+  List<Offset> points, {
+  double squareSize = Unistroke.squareSize,
+  bool preserveAspectRatio = false,
+}) {
   final b = boundingBox(points);
+  final longestSide = b.longestSide;
+
+  final scaleX = preserveAspectRatio ? longestSide : b.width;
+  final scaleY = preserveAspectRatio ? longestSide : b.height;
+
   return points
       .map((p) => Offset(
-            p.dx * (squareSize / b.width),
-            p.dy * (squareSize / b.height),
+            p.dx * (squareSize / scaleX),
+            p.dy * (squareSize / scaleY),
           ))
       .toList();
 }

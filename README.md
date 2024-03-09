@@ -1,9 +1,19 @@
-A Dart port of the $1 Unistroke Recognizer, including the Protractor enhancement, with some additional features.
+A Dart port of the
+[$1 Unistroke Recognizer](https://depts.washington.edu/acelab/proj/dollar/index.html)
+with some enhancements:
+- The [Protractor enhancement](https://dl.acm.org/doi/10.1145/1753326.1753654)
+- A way to get a "perfect" (canonical) shape from the user's stroke
+- A [better suited algorithm](https://en.wikipedia.org/wiki/Mean_absolute_error) for detecting straight lines
+- Type safety (with the `DefaultUnistrokeNames` enum, or another if you're using custom unistrokes)
 
 By default it recognizes lines, circles, rectangles, and triangles.
 But you can also recognize any custom unistrokes (see below).
 
+I'm building and maintaining this package for my open source note-taking app,
+[Saber](https://github.com/saber-notes/saber).
+
 [![Pub](https://img.shields.io/pub/v/one_dollar_unistroke_recognizer.svg)](https://pub.dev/packages/one_dollar_unistroke_recognizer)
+[![BSD 3-Clause License](https://img.shields.io/badge/license-BSD%203--Clause-blue.svg)](LICENSE)
 
 ## Usage
 

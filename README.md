@@ -115,8 +115,6 @@ final recognized = recognizeCustomUnistroke<MyUnistrokeNames>(
 );
 ```
 
-You could also set `referenceUnistrokes` to `example$1Unistrokes` to use the templates that were originally defined in the paper, though they're not very pretty and were probably intended to just be a proof-of-concept. (The key type for `example$1Unistrokes` is `String`.)
-
 #### Straight lines
 
 Straight lines are a special case in the default unistroke templates,
@@ -152,5 +150,7 @@ final recognized = recognizeCustomUnistroke<MyUnistrokeNames>(
 The $1 Unistroke Recognizer is a 2-D single-stroke recognizer designed for rapid prototyping of gesture-based user interfaces. In machine learning terms, $1 is an instance-based nearest-neighbor classifier with a 2-D Euclidean distance function, i.e., a geometric template matcher. $1 is a significant extension of the proportional shape matching approach used in SHARK2, which itself is an adaptation of Tappert's elastic matching approach with zero look-ahead. Despite its simplicity, $1 requires very few templates to perform well and is only about 100 lines of code, making it easy to deploy. An optional enhancement called Protractor improves $1's speed. 
 
 You can read more about the $1 Unistroke Recognizer at [depts.washington.edu/acelab/proj/dollar](https://depts.washington.edu/acelab/proj/dollar/index.html).
+
+On that link, you'll see a demo with 16 templates. This package uses a different set of templates by default, but you can use the original templates by setting `referenceUnistrokes` to `example$1Unistrokes`.
 
 This Dart package is a port of the JavaScript version of the $1 Unistroke Recognizer, which you can find at [depts.washington.edu/acelab/proj/dollar/dollar.js](https://depts.washington.edu/acelab/proj/dollar/dollar.js).

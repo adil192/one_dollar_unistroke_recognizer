@@ -113,11 +113,13 @@ RecognizedCustomUnistroke<K>? recognizeCustomUnistroke<K>(
         (straightLineName ?? DefaultUnistrokeNames.line)) {
       final mae = meanAbsoluteError(candidate.pointsWithAspectRatioPreserved);
       const threshold = Unistroke.squareSize * 0.1;
-      if (mae > threshold) continue;
+      final score = 1 - mae / threshold;
+      if (score < 0) continue;
 
       closestUnistroke = unistrokeTemplate;
+      // Inverse of the score calculated below
       closestUnistrokeDist =
-          useProtractor ? mae / Unistroke.squareDiagonal : mae;
+          useProtractor ? (1 - score) : (1 - score) * Unistroke.squareDiagonal;
       break;
     }
 

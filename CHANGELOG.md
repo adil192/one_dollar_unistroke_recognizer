@@ -1,3 +1,7 @@
+## 1.1.1
+
+* Fixes `RecognizedUnistroke.score` always being close to 1.0 when the stroke is recognized as a straight line.
+
 ## 1.1.0
 
 * Separated the logic for straight lines and for other shapes to fix the issue where arbitrary strokes would often be incorrectly detected as a line.

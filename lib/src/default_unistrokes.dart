@@ -22,7 +22,7 @@ final default$1Unistrokes =
         50 + 50 * sin(2 * pi * i / _circlePoints),
       ),
   ]),
-  Unistroke(DefaultUnistrokeNames.rectangle, [
+  Unistroke(DefaultUnistrokeNames.rectangle, isCanonical: true, [
     _rectangle.topLeft,
     _rectangle.topRight,
     _rectangle.bottomRight,

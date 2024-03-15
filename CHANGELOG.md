@@ -1,3 +1,7 @@
+## 1.1.2
+
+* Better recognition of wide/tall rectangles, thanks to [@QubaB](https://github.com/QubaB)
+
 ## 1.1.1
 
 * Fixes `RecognizedUnistroke.score` always being close to 1.0 when the stroke is recognized as a straight line.

@@ -5,14 +5,15 @@ import 'package:one_dollar_unistroke_recognizer/src/line_detection.dart';
 import 'package:one_dollar_unistroke_recognizer/src/unistroke.dart';
 
 const _circlePoints = 32;
-const _rectangle = Rect.fromLTWH(0, 0, 50, 50);
+const _square = Rect.fromLTWH(0, 0, 50, 50);
+const _rectangle = Rect.fromLTWH(0, 0, 100, 50);
 
 /// The default unistroke templates provided by this package.
 final default$1Unistrokes =
     List<Unistroke<DefaultUnistrokeNames>>.unmodifiable([
   Unistroke(DefaultUnistrokeNames.line, [
-    _rectangle.centerLeft,
-    _rectangle.centerRight,
+    _square.centerLeft,
+    _square.centerRight,
   ]),
   Unistroke(DefaultUnistrokeNames.circle, [
     for (var i = 0; i <= _circlePoints; i++)
@@ -20,6 +21,13 @@ final default$1Unistrokes =
         50 + 50 * cos(2 * pi * i / _circlePoints),
         50 + 50 * sin(2 * pi * i / _circlePoints),
       ),
+  ]),
+  Unistroke(DefaultUnistrokeNames.rectangle, isCanonical: true, [
+    _square.topLeft,
+    _square.topRight,
+    _square.bottomRight,
+    _square.bottomLeft,
+    _square.topLeft,
   ]),
   Unistroke(DefaultUnistrokeNames.rectangle, [
     _rectangle.topLeft,
@@ -29,10 +37,10 @@ final default$1Unistrokes =
     _rectangle.topLeft,
   ]),
   Unistroke(DefaultUnistrokeNames.triangle, [
-    _rectangle.topCenter,
-    _rectangle.bottomRight,
-    _rectangle.bottomLeft,
-    _rectangle.topCenter,
+    _square.topCenter,
+    _square.bottomRight,
+    _square.bottomLeft,
+    _square.topCenter,
   ]),
 ]);
 

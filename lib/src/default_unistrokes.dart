@@ -6,6 +6,8 @@ import 'package:one_dollar_unistroke_recognizer/src/unistroke.dart';
 
 const _circlePoints = 32;
 const _rectangle = Rect.fromLTWH(0, 0, 50, 50);
+const _rectangleWidth = Rect.fromLTWH(0, 0, 100, 50);
+const _rectangleHeight = Rect.fromLTWH(0, 0, 50, 100);
 
 /// The default unistroke templates provided by this package.
 final default$1Unistrokes =
@@ -33,6 +35,20 @@ final default$1Unistrokes =
     _rectangle.bottomRight,
     _rectangle.bottomLeft,
     _rectangle.topCenter,
+  ]),
+  Unistroke(DefaultUnistrokeNames.rectangle, [
+    _rectangleWidth.topLeft,
+    _rectangleWidth.topRight,
+    _rectangleWidth.bottomRight,
+    _rectangleWidth.bottomLeft,
+    _rectangleWidth.topLeft,
+  ]),
+  Unistroke(DefaultUnistrokeNames.rectangle, [
+    _rectangleHeight.topLeft,
+    _rectangleHeight.topRight,
+    _rectangleHeight.bottomRight,
+    _rectangleHeight.bottomLeft,
+    _rectangleHeight.topLeft,
   ]),
 ]);
 

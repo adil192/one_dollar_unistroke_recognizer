@@ -132,27 +132,18 @@ in that they're best recognized by a different algorithm than the other shapes (
 
 If you're using `default$1Unistrokes` (the default), you don't need to worry about this, and straight lines will be detected as `DefaultUnistrokeNames.line`.
 
-But if you're using custom unistroke templates, you'll need to specify the `name` of the straight line unistroke template.
-I still recommend that you provide a sensible points list for the line template, but it won't be used for the detection itself.
+But if you're using custom unistroke templates,
+ensure that your straight line unistroke template has exactly 2 points and that they're distinct.
 
 ```dart
-enum MyUnistrokeNames {
-  line,
-  // ...
-}
-
 referenceUnistrokes = <Unistroke<MyUnistrokeNames>>[
   Unistroke(MyUnistrokeNames.line, [
-    Offset(50, 0),
-    Offset(50, 100),
+    // This template should have exactly 2 distinct points.
+    Offset(0, 0),
+    Offset(0, 100),
   ]),
   // ...
 ];
-
-final recognized = recognizeCustomUnistroke<MyUnistrokeNames>(
-  points,
-  straightLineName: MyUnistrokeNames.line,
-);
 ```
 
 ## About the $1 Unistroke Recognizer

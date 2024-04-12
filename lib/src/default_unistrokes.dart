@@ -12,8 +12,8 @@ const _rectangle = Rect.fromLTWH(0, 0, 100, 50);
 final default$1Unistrokes =
     List<Unistroke<DefaultUnistrokeNames>>.unmodifiable([
   Unistroke(DefaultUnistrokeNames.line, [
-    _square.centerLeft,
-    _square.centerRight,
+    _square.topLeft,
+    _square.topRight,
   ]),
   Unistroke(DefaultUnistrokeNames.circle, [
     for (var i = 0; i <= _circlePoints; i++)

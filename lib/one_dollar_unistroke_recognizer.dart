@@ -90,13 +90,15 @@ RecognizedCustomUnistroke<K>? recognizeUnistrokeOfType<K>(
 ///
 /// If you're using custom unistroke templates,
 /// and you need straight line detection,
-/// please set [straightLineName] to the name of the straight line template.
-/// This is needed since straight lines are best recognized with
-/// a different algorithm than the standard $1 algorithm.
+/// please ensure your straight line template has exactly 2 distinct points.
+/// The template will then use a different algorithm
+/// better suited to recognize straight lines.
 RecognizedCustomUnistroke<K>? recognizeCustomUnistroke<K>(
   List<Offset> inputPoints, {
   bool useProtractor = true,
   List<Unistroke<K>>? overrideReferenceUnistrokes,
+  @Deprecated('This is no longer needed. Just make sure the template has 2 '
+      'distinct points if you want to recognize straight lines.')
   K? straightLineName,
 }) {
   // Not enough points to recognize
@@ -109,8 +111,7 @@ RecognizedCustomUnistroke<K>? recognizeCustomUnistroke<K>(
 
   for (final unistrokeTemplate
       in (overrideReferenceUnistrokes ?? referenceUnistrokes)) {
-    if (unistrokeTemplate.name ==
-        (straightLineName ?? DefaultUnistrokeNames.line)) {
+    if (unistrokeTemplate.isALineExactly) {
       final mae = meanAbsoluteError(candidate.pointsWithAspectRatioPreserved);
       const threshold = Unistroke.squareSize * 0.1;
       final score = 1 - mae / threshold;

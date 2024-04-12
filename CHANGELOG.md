@@ -1,3 +1,8 @@
+## 1.2.0
+
+* Fixed the 'spikes' in `getCanonicalPolygon` for lines.
+* If you're using custom unistrokes, you no longer need to specify `straightLineName` in `recognizeCustomUnistroke(..., straightLineName: ...)`. Just make sure your straight line unistroke template has exactly 2 distinct points and the recognizer will pick it up automatically.
+
 ## 1.1.2
 
 * Better recognition of wide/tall rectangles, thanks to [@QubaB](https://github.com/QubaB)

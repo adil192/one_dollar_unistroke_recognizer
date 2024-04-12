@@ -149,15 +149,15 @@ class _Painter extends CustomPainter {
           ..strokeWidth = 2
           ..color = Colors.black.withOpacity(0.5),
       )
-      ..drawLine(
-        line.$1,
-        line.$2,
-        paint..color = Colors.orange,
-      )
       ..drawPoints(
         PointMode.polygon,
         recognizedStroke!.convertToCanonicalPolygon(),
         paint..color = Colors.red,
+      )
+      ..drawLine(
+        line.$1,
+        line.$2,
+        paint..color = Colors.orange,
       )
       ..drawCircle(
         circle.$1,

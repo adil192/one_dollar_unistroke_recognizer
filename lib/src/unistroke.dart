@@ -27,6 +27,10 @@ class Unistroke<K> {
   @visibleForTesting
   final List<Offset> inputPoints;
 
+  /// Whether [inputPoints] were two points that were not the same.
+  late final isALineExactly =
+      inputPoints.length == 2 && inputPoints.first != inputPoints.last;
+
   /// The manipulated input points.
   late final points = processInputPoints(inputPoints);
 

@@ -50,6 +50,11 @@ class RecognizedCustomUnistroke<K> {
   List<Offset> convertToCanonicalPolygon() {
     final unscaledCanonicalPolygon = findUnscaledCanonicalPolygon();
 
+    if (unscaledCanonicalPolygon.isALineExactly) {
+      final (start, end) = convertToLine();
+      return [start, end];
+    }
+
     final originalBoundingBox = boundingBox(originalPoints);
     final canonicalBoundingBox = boundingBox(unscaledCanonicalPolygon.points);
 

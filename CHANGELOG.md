@@ -1,3 +1,7 @@
+# 1.3.2
+
+- Fixed pictures not showing up in the README on pub.dev.
+
 # 1.3.1
 
 - Added the star to the README.

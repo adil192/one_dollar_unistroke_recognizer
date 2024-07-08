@@ -51,10 +51,10 @@ You can get a "perfect" shape from the user's stroke by calling one of the follo
 - `convertToRect()`: Returns the `Rect` of the best-fit (bounding box) rectangle. Tip: you can round the corners of the Rect with `RRect.fromRectAndRadius`. (Shown in 🟢green in the examples below.)
 
 <!-- Show examples from the test/goldens folder in a table -->
-| Line | Circle | Rectangle | Triangle |
-| -- | -- | -- | -- |
-| ![Line](https://raw.githubusercontent.com/adil192/one_dollar_unistroke_recognizer/main/test/goldens/line.png) | ![Circle](https://raw.githubusercontent.com/adil192/one_dollar_unistroke_recognizer/main/test/goldens/circle.png) | ![Rectangle](https://raw.githubusercontent.com/adil192/one_dollar_unistroke_recognizer/main/test/goldens/rectangle.png) | ![Triangle](https://raw.githubusercontent.com/adil192/one_dollar_unistroke_recognizer/main/test/goldens/triangle.png) |
-| ![Line HQ](https://raw.githubusercontent.com/adil192/one_dollar_unistroke_recognizer/main/test/goldens/line_hq.png) | ![Circle HQ](https://raw.githubusercontent.com/adil192/one_dollar_unistroke_recognizer/main/test/goldens/circle_hq.png) | ![Rectangle HQ](https://raw.githubusercontent.com/adil192/one_dollar_unistroke_recognizer/main/test/goldens/rectangle_hq.png) | ![Triangle HQ](https://raw.githubusercontent.com/adil192/one_dollar_unistroke_recognizer/main/test/goldens/triangle_hq.png) |
+| Line | Circle | Rectangle | Triangle | Star |
+| -- | -- | -- | -- | -- |
+| ![Line](test/goldens/line.png) | ![Circle](test/goldens/circle.png) | ![Rectangle](test/goldens/rectangle.png) | ![Triangle](test/goldens/triangle.png) | ![Star](test/goldens/star.png) |
+| ![Line HQ](test/goldens/line_hq.png) | ![Circle HQ](test/goldens/circle_hq.png) | ![Rectangle HQ](test/goldens/rectangle_hq.png) | ![Triangle HQ](test/goldens/triangle_hq.png) | ![Star HQ](test/goldens/star_hq.png) |
 
 ```dart
 final recognized = recognizeUnistroke(points);
@@ -78,6 +78,7 @@ switch (recognized?.name) {
       canvas.drawRect(rect, paint);
     }
   case DefaultUnistrokeNames.triangle:
+  case DefaultUnistrokeNames.star:
     final polygon = recognized!.convertToCanonicalPolygon();
     canvas.drawPoints(PointMode.polygon, polygon, paint);
 }

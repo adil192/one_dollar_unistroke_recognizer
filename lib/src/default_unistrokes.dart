@@ -18,8 +18,8 @@ final default$1Unistrokes =
   Unistroke(DefaultUnistrokeNames.circle, [
     for (var i = 0; i <= _circlePoints; i++)
       Offset(
-        50 + 50 * cos(2 * pi * i / _circlePoints),
-        50 + 50 * sin(2 * pi * i / _circlePoints),
+        cos(2 * pi * i / _circlePoints),
+        sin(2 * pi * i / _circlePoints),
       ),
   ]),
   Unistroke(DefaultUnistrokeNames.rectangle, isCanonical: true, [
@@ -42,6 +42,13 @@ final default$1Unistrokes =
     _square.bottomLeft,
     _square.topCenter,
   ]),
+  Unistroke(DefaultUnistrokeNames.star, [
+    for (final theta in const [90, 234, 18, 162, 306, 90])
+      Offset(
+        cos(theta * pi / 180),
+        -sin(theta * pi / 180),
+      ),
+  ]),
 ]);
 
 /// The enum of the names of the default unistrokes.
@@ -63,4 +70,7 @@ enum DefaultUnistrokeNames {
 
   /// A triangle
   triangle,
+
+  /// A star
+  star,
 }

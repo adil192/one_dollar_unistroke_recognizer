@@ -4,6 +4,7 @@ import 'dart:ui' show PointMode;
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:one_dollar_unistroke_recognizer/one_dollar_unistroke_recognizer.dart';
+import 'package:one_dollar_unistroke_recognizer/src/utils.dart';
 
 void main() {
   group('Canonical', () {
@@ -108,6 +109,39 @@ void main() {
           await expectLater(
             find.byType(CustomPaint),
             matchesGoldenFile(hq ? 'goldens/line_hq.png' : 'goldens/line.png'),
+          );
+        });
+      }
+    });
+
+    group('Star', () {
+      for (bool hq in [false, true]) {
+        testWidgets(hq ? 'HQ' : 'LQ', (tester) async {
+          final recognized = recognizeUnistroke(
+            _approximatePolygon(
+              _adjustPolygonForTest(default$1Unistrokes
+                  .firstWhere(
+                      (element) => element.name == DefaultUnistrokeNames.star)
+                  .inputPoints),
+              hq,
+            ).toList(),
+          );
+
+          await tester.pumpWidget(Center(
+            child: SizedBox(
+              width: 400,
+              height: 400,
+              child: RepaintBoundary(
+                child: CustomPaint(
+                  painter: _Painter(recognized),
+                ),
+              ),
+            ),
+          ));
+
+          await expectLater(
+            find.byType(CustomPaint),
+            matchesGoldenFile(hq ? 'goldens/star_hq.png' : 'goldens/star.png'),
           );
         });
       }
@@ -256,6 +290,22 @@ Iterable<Offset> _approximateTriangle(bool hq) {
     rect.topCenter,
   ];
   return _approximatePolygon(corners, hq);
+}
+
+/// Adjust a polygon to be centered at (200, 200)
+/// and have a width and height of 300.
+List<Offset> _adjustPolygonForTest(List<Offset> points) {
+  final rect = boundingBox(points);
+  final center = rect.center;
+  final width = rect.width;
+  final height = rect.height;
+
+  return points
+      .map((point) => Offset(
+            200 + (point.dx - center.dx) * 300 / width,
+            200 + (point.dy - center.dy) * 300 / height,
+          ))
+      .toList();
 }
 
 Iterable<Offset> _approximatePolygon(List<Offset> corners, bool hq) sync* {

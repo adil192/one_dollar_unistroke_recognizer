@@ -93,6 +93,7 @@ class _CanvasDrawPainter extends CustomPainter {
           paint,
         );
       case DefaultUnistrokeNames.triangle:
+      case DefaultUnistrokeNames.star:
         final polygon = recognized!.convertToCanonicalPolygon();
         canvas.drawPoints(PointMode.polygon, polygon, paint);
     }

@@ -49,6 +49,8 @@ class RecognizedCustomUnistroke<K> {
   /// If it's a circle, use [convertToCircle] instead.
   List<Offset> convertToCanonicalPolygon() {
     final unscaledCanonicalPolygon = findUnscaledCanonicalPolygon();
+    late final unscaledCanonicalPoints =
+        unscaledCanonicalPolygon.pointsBeforeResampling;
 
     if (unscaledCanonicalPolygon.isALineExactly) {
       final (start, end) = convertToLine();
@@ -56,7 +58,7 @@ class RecognizedCustomUnistroke<K> {
     }
 
     final originalBoundingBox = boundingBox(originalPoints);
-    final canonicalBoundingBox = boundingBox(unscaledCanonicalPolygon.points);
+    final canonicalBoundingBox = boundingBox(unscaledCanonicalPoints);
 
     final originalCenter = originalBoundingBox.center;
     final originalWidth = originalBoundingBox.width;
@@ -74,7 +76,7 @@ class RecognizedCustomUnistroke<K> {
       ..rotateZ(indicativeAngle(originalPoints))
       ..translate(-canonicalCenter.dx, -canonicalCenter.dy);
 
-    return unscaledCanonicalPolygon.points
+    return unscaledCanonicalPoints
         .map((point) => transform.transform3(Vector3(point.dx, point.dy, 0)))
         .map((point) => Offset(point.x, point.y))
         .toList();

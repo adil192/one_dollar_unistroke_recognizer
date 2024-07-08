@@ -40,6 +40,10 @@ class Unistroke<K> {
   late final pointsWithAspectRatioPreserved =
       processInputPoints(inputPoints, preserveAspectRatio: true);
 
+  /// The manipulated input points, before being [resample]d.
+  late final pointsBeforeResampling =
+      processInputPoints(inputPoints, shouldResample: false);
+
   /// The vectorized version of [points],
   /// used for the Protractor algorithm.
   late final List<double> vector = vectorize(points);
@@ -75,14 +79,16 @@ class Unistroke<K> {
   /// to match the [Unistroke.numPoints] and [Unistroke.squareSize] constants.
   @visibleForTesting
   static List<Offset> processInputPoints(
-    Iterable<Offset> inputPoints, {
+    List<Offset> points, {
     bool preserveAspectRatio = false,
+    bool shouldResample = true,
   }) {
-    var points =
-        inputPoints.toList(); // copy to new list since [resample] mutates
-    points = resample(points, numPoints);
-    assert(points.length == numPoints,
-        'resampled to ${points.length} but expected $numPoints');
+    if (shouldResample) {
+      // copy to new list since [resample] mutates
+      points = resample(points.toList(), numPoints);
+      assert(points.length == numPoints,
+          'resampled to ${points.length} but expected $numPoints');
+    }
     final radians = indicativeAngle(points);
     points = rotateBy(points, -radians);
     points = scaleTo(points,

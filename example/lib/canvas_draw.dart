@@ -21,6 +21,7 @@ class CanvasDraw extends StatefulWidget {
 
 class _CanvasDrawState extends State<CanvasDraw> with ChangeNotifier {
   List<Offset> points = [];
+  bool finishedStroke = true;
 
   @override
   void initState() {
@@ -42,15 +43,17 @@ class _CanvasDrawState extends State<CanvasDraw> with ChangeNotifier {
   Widget build(BuildContext context) {
     return GestureDetector(
       onPanStart: (details) {
+        finishedStroke = false;
         points = [details.localPosition];
-        notifyListeners();
       },
       onPanUpdate: (details) {
         points.add(details.localPosition);
         notifyListeners();
       },
       onPanEnd: (details) {
+        finishedStroke = true;
         widget.onDrawEnd(points);
+        notifyListeners();
       },
       child: CustomPaint(
         painter: _CanvasDrawPainter(this),
@@ -74,7 +77,7 @@ class _CanvasDrawPainter extends CustomPainter {
 
     canvas.drawPoints(PointMode.polygon, state.points, paint);
 
-    paint.color = Colors.blue.withOpacity(0.5);
+    paint.color = Colors.blue.withOpacity(state.finishedStroke ? 1 : 0.5);
 
     final recognized = state.widget.recognized.value;
     switch (recognized?.name) {
@@ -102,6 +105,7 @@ class _CanvasDrawPainter extends CustomPainter {
   @override
   bool shouldRepaint(covariant _CanvasDrawPainter oldDelegate) {
     return oldDelegate.state.points != state.points ||
+        oldDelegate.state.points.length != state.points.length ||
         oldDelegate.state.widget.recognized.value?.name !=
             state.widget.recognized.value?.name;
   }

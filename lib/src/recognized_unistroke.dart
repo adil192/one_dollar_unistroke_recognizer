@@ -1,3 +1,4 @@
+import 'dart:math';
 import 'dart:ui';
 
 import 'package:flutter/foundation.dart';
@@ -47,7 +48,10 @@ class RecognizedCustomUnistroke<K> {
   ///
   /// This function assumes that the recognized unistroke is a polygon.
   /// If it's a circle, use [convertToCircle] instead.
-  List<Offset> convertToCanonicalPolygon() {
+  List<Offset> convertToCanonicalPolygon({
+    double Function(double) roundIndicativeAngle =
+        RecognizedUnistroke.roundIndicativeAngle,
+  }) {
     final unscaledCanonicalPolygon = findUnscaledCanonicalPolygon();
     late final unscaledCanonicalPoints =
         unscaledCanonicalPolygon.pointsBeforeResampling;
@@ -58,6 +62,7 @@ class RecognizedCustomUnistroke<K> {
     }
 
     final originalBoundingBox = boundingBox(originalPoints);
+    final originalAngle = roundIndicativeAngle(indicativeAngle(originalPoints));
     final canonicalBoundingBox = boundingBox(unscaledCanonicalPoints);
 
     final originalCenter = originalBoundingBox.center;
@@ -73,7 +78,7 @@ class RecognizedCustomUnistroke<K> {
     final transform = Matrix4.identity()
       ..translate(originalCenter.dx, originalCenter.dy)
       ..scale(originalWidth / canonicalWidth, originalHeight / canonicalHeight)
-      ..rotateZ(indicativeAngle(originalPoints))
+      ..rotateZ(originalAngle)
       ..translate(-canonicalCenter.dx, -canonicalCenter.dy);
 
     return unscaledCanonicalPoints
@@ -125,5 +130,11 @@ class RecognizedCustomUnistroke<K> {
       (ref) => ref.isCanonical,
       orElse: () => choices.first,
     );
+  }
+
+  /// Rounds [angle] to the nearest 5 degrees.
+  static double roundIndicativeAngle(double angle) {
+    const precision = 5 * pi / 180;
+    return (angle / precision).roundToDouble() * precision;
   }
 }

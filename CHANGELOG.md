@@ -1,6 +1,12 @@
+# 1.3.0
+
+- Added a star to the default unistrokes.
+- Fixed weird corners in the result of `convertToCanonicalPolygon`.
+- The rotation of the recognized shape is now rounded to the nearest 5 degrees. You can change this by making your own rounding function and passing it to `convertToCanonicalPolygon`.
+
 ## 1.2.0
 
-* Fixed the 'spikes' in `getCanonicalPolygon` for lines.
+* Fixed the 'spikes' in `convertToCanonicalPolygon` for lines.
 * If you're using custom unistrokes, you no longer need to specify `straightLineName` in `recognizeCustomUnistroke(..., straightLineName: ...)`. Just make sure your straight line unistroke template has exactly 2 distinct points and the recognizer will pick it up automatically.
 
 ## 1.1.2

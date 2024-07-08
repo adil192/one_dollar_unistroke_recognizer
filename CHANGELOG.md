@@ -1,3 +1,7 @@
+# 1.3.1
+
+- Added the star to the README.
+
 # 1.3.0
 
 - Added a star to the default unistrokes.

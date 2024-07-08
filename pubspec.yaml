@@ -1,6 +1,6 @@
 name: one_dollar_unistroke_recognizer
 description: The $1 Unistroke Recognizer, a 2D single-stroke recognizer, plus features like straight line recognition, the Protractor enhancement, a way to correct user's shapes, and more.
-version: 1.3.0
+version: 1.3.1
 homepage: https://adil192.github.io/one_dollar_unistroke_recognizer/
 repository: https://github.com/adil192/one_dollar_unistroke_recognizer
 issue_tracker: https://github.com/adil192/one_dollar_unistroke_recognizer/issues

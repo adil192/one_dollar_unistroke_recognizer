@@ -14,6 +14,8 @@ export 'package:one_dollar_unistroke_recognizer/src/example_unistrokes.dart'
     show example$1Unistrokes;
 export 'package:one_dollar_unistroke_recognizer/src/recognized_unistroke.dart'
     show RecognizedUnistroke, RecognizedCustomUnistroke;
+export 'package:one_dollar_unistroke_recognizer/src/unistroke.dart'
+    show Unistroke;
 
 /// The unistroke templates that can be recognized by [recognizeUnistroke].
 ///

@@ -24,7 +24,6 @@ class Unistroke<K> {
   final K? name;
 
   /// The raw input points.
-  @visibleForTesting
   final List<Offset> inputPoints;
 
   /// Whether [inputPoints] has exactly 2 distinct points.

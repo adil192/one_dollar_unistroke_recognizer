@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:one_dollar_unistroke_recognizer/one_dollar_unistroke_recognizer.dart';
 import 'package:one_dollar_unistroke_recognizer_example/canvas_draw.dart';
+import 'package:one_dollar_unistroke_recognizer_example/unistroke_preview.dart';
 
 final recognized = ValueNotifier<RecognizedUnistroke?>(null);
 Timer? pointDebounce;
@@ -37,24 +38,17 @@ class MyApp extends StatelessWidget {
         ),
         body: Column(
           children: [
-            Center(
-              child: Card(
-                color: Colors.blue.withOpacity(0.1),
-                margin: const EdgeInsets.all(16),
-                child: Padding(
-                  padding: const EdgeInsets.all(8),
-                  child: Wrap(
-                    spacing: 8,
-                    runSpacing: 8,
-                    children: [
-                      for (final referenceUnistroke in referenceUnistrokes)
-                        Chip(
-                          label: Text('${referenceUnistroke.name}'),
-                        ),
-                    ],
+            Wrap(
+              spacing: 8,
+              runSpacing: 8,
+              children: [
+                for (final shape in DefaultUnistrokeNames.values)
+                  UnistrokePreview(
+                    unistroke: referenceUnistrokes.firstWhere(
+                      (unistroke) => unistroke.name == shape,
+                    ),
                   ),
-                ),
-              ),
+              ],
             ),
             Expanded(
               child: SizedBox(

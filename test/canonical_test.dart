@@ -174,14 +174,14 @@ class _Painter extends CustomPainter {
         recognizedStroke!.originalPoints,
         paint
           ..strokeWidth = 4
-          ..color = Colors.white.withOpacity(0.5),
+          ..color = Colors.white.withValues(alpha: 0.5),
       )
       ..drawPoints(
         PointMode.polygon,
         recognizedStroke!.originalPoints,
         paint
           ..strokeWidth = 2
-          ..color = Colors.black.withOpacity(0.5),
+          ..color = Colors.black.withValues(alpha: 0.5),
       )
       ..drawPoints(
         PointMode.polygon,
@@ -196,11 +196,11 @@ class _Painter extends CustomPainter {
       ..drawCircle(
         circle.$1,
         circle.$2,
-        paint..color = Colors.blue.withOpacity(0.5),
+        paint..color = Colors.blue.withValues(alpha: 0.5),
       )
       ..drawRRect(
         RRect.fromRectAndRadius(rect, const Radius.circular(10)),
-        paint..color = Colors.green.withOpacity(0.5),
+        paint..color = Colors.green.withValues(alpha: 0.5),
       );
   }
 

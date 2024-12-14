@@ -70,14 +70,14 @@ class _CanvasDrawPainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     final paint = Paint()
-      ..color = Colors.black.withOpacity(0.5)
+      ..color = Colors.black.withValues(alpha: 0.5)
       ..strokeWidth = 3
       ..strokeCap = StrokeCap.round
       ..style = PaintingStyle.stroke;
 
     canvas.drawPoints(PointMode.polygon, state.points, paint);
 
-    paint.color = Colors.blue.withOpacity(state.finishedStroke ? 1 : 0.5);
+    paint.color = Colors.blue.withValues(alpha: state.finishedStroke ? 1 : 0.5);
 
     final recognized = state.widget.recognized.value;
     switch (recognized?.name) {

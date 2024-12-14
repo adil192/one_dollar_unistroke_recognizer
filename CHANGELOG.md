@@ -1,3 +1,7 @@
+# 1.3.3
+
+- Adapted the example and test to Flutter 3.27. The package itself is still compatible with older Flutter versions.
+
 # 1.3.2
 
 - Fixed pictures not showing up in the README on pub.dev.

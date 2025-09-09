@@ -20,7 +20,10 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: '\$1 Unistroke Recognizer Demo',
       theme: ThemeData(
-        useMaterial3: true,
+        colorScheme: ColorScheme.highContrastLight(),
+      ),
+      darkTheme: ThemeData(
+        colorScheme: ColorScheme.highContrastDark(),
       ),
       home: Scaffold(
         appBar: AppBar(
@@ -30,7 +33,7 @@ class MyApp extends StatelessWidget {
               return Text(
                 recognized == null
                     ? 'Draw below to detect a shape'
-                    : 'Detected "${recognized.name}" with score '
+                    : 'Detected "${recognized.name?.name}" with score '
                         '${recognized.score.toStringAsFixed(2)}',
               );
             },
@@ -38,16 +41,19 @@ class MyApp extends StatelessWidget {
         ),
         body: Column(
           children: [
-            Wrap(
-              spacing: 8,
-              runSpacing: 8,
+            Row(
               children: [
-                for (final shape in DefaultUnistrokeNames.values)
-                  UnistrokePreview(
-                    unistroke: referenceUnistrokes.firstWhere(
-                      (unistroke) => unistroke.name == shape,
+                const SizedBox(width: 8),
+                for (final shape in DefaultUnistrokeNames.values) ...[
+                  Expanded(
+                    child: UnistrokePreview(
+                      unistroke: referenceUnistrokes.firstWhere(
+                        (unistroke) => unistroke.name == shape,
+                      ),
                     ),
                   ),
+                  const SizedBox(width: 8),
+                ],
               ],
             ),
             Expanded(

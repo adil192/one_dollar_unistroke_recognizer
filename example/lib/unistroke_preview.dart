@@ -20,9 +20,7 @@ class UnistrokePreview extends StatelessWidget {
         child: Column(
           children: [
             Text(
-              unistroke.name
-                  .toString()
-                  .substring((DefaultUnistrokeNames).toString().length + 1),
+              (unistroke.name as DefaultUnistrokeNames).name,
               style: const TextStyle(
                 fontSize: 20,
               ),
@@ -31,7 +29,10 @@ class UnistrokePreview extends StatelessWidget {
               width: 50,
               height: 50,
               child: CustomPaint(
-                painter: _UnistrokePreviewPainter(unistroke),
+                painter: _UnistrokePreviewPainter(
+                  unistroke,
+                  color: ColorScheme.of(context).onSurface,
+                ),
               ),
             ),
           ],
@@ -42,14 +43,15 @@ class UnistrokePreview extends StatelessWidget {
 }
 
 class _UnistrokePreviewPainter extends CustomPainter {
-  _UnistrokePreviewPainter(this.unistroke);
+  _UnistrokePreviewPainter(this.unistroke, {required this.color});
 
   final Unistroke unistroke;
+  final Color color;
 
   @override
   void paint(Canvas canvas, Size size) {
     final paint = Paint()
-      ..color = Colors.black
+      ..color = color
       ..strokeWidth = 2
       ..style = PaintingStyle.stroke;
 

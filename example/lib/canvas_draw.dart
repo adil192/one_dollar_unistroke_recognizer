@@ -22,6 +22,7 @@ class CanvasDraw extends StatefulWidget {
 class _CanvasDrawState extends State<CanvasDraw> with ChangeNotifier {
   List<Offset> points = [];
   bool finishedStroke = true;
+  Color onSurface = const Color(0x88888888);
 
   @override
   void initState() {
@@ -41,6 +42,7 @@ class _CanvasDrawState extends State<CanvasDraw> with ChangeNotifier {
 
   @override
   Widget build(BuildContext context) {
+    onSurface = ColorScheme.of(context).onSurface;
     return GestureDetector(
       onPanStart: (details) {
         finishedStroke = false;
@@ -70,7 +72,7 @@ class _CanvasDrawPainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     final paint = Paint()
-      ..color = Colors.black.withValues(alpha: 0.5)
+      ..color = state.onSurface.withValues(alpha: 0.5)
       ..strokeWidth = 3
       ..strokeCap = StrokeCap.round
       ..style = PaintingStyle.stroke;

@@ -76,10 +76,11 @@ class RecognizedCustomUnistroke<K> {
     /// The transform that transforms the canonical polygon
     /// to the original polygon.
     final transform = Matrix4.identity()
-      ..translate(originalCenter.dx, originalCenter.dy)
-      ..scale(originalWidth / canonicalWidth, originalHeight / canonicalHeight)
+      ..translateByDouble(originalCenter.dx, originalCenter.dy, 0, 1)
+      ..scaleByDouble(originalWidth / canonicalWidth,
+          originalHeight / canonicalHeight, 1, 1)
       ..rotateZ(originalAngle)
-      ..translate(-canonicalCenter.dx, -canonicalCenter.dy);
+      ..translateByDouble(-canonicalCenter.dx, -canonicalCenter.dy, 0, 1);
 
     return unscaledCanonicalPoints
         .map((point) => transform.transform3(Vector3(point.dx, point.dy, 0)))

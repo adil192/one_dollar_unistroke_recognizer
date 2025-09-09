@@ -1,3 +1,8 @@
+# 1.3.4
+
+- Updated deprecated methods for Flutter 3.35.
+- Added dark mode to the [demo](https://adil192.github.io/one_dollar_unistroke_recognizer/).
+
 # 1.3.3
 
 - Adapted the example and test to Flutter 3.27. The package itself is still compatible with older Flutter versions.

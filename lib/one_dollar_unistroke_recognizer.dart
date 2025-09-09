@@ -1,5 +1,3 @@
-library one_dollar_unistroke_recognizer;
-
 import 'dart:ui' show Offset;
 
 import 'package:one_dollar_unistroke_recognizer/src/default_unistrokes.dart';

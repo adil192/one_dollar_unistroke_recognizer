@@ -50,7 +50,7 @@ jobs:
 
       - name: Build web
         working-directory: example
-        run: flutter build web --base-href /one_dollar_unistroke_recognizer/
+        run: flutter build web --wasm --base-href /one_dollar_unistroke_recognizer/
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3

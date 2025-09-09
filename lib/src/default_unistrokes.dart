@@ -9,47 +9,42 @@ const _square = Rect.fromLTWH(0, 0, 50, 50);
 const _rectangle = Rect.fromLTWH(0, 0, 100, 50);
 
 /// The default unistroke templates provided by this package.
-final default$1Unistrokes =
-    List<Unistroke<DefaultUnistrokeNames>>.unmodifiable([
-  Unistroke(DefaultUnistrokeNames.line, [
-    _square.topLeft,
-    _square.topRight,
-  ]),
-  Unistroke(DefaultUnistrokeNames.circle, [
-    for (var i = 0; i <= _circlePoints; i++)
-      Offset(
-        cos(2 * pi * i / _circlePoints),
-        sin(2 * pi * i / _circlePoints),
-      ),
-  ]),
-  Unistroke(DefaultUnistrokeNames.rectangle, isCanonical: true, [
-    _square.topLeft,
-    _square.topRight,
-    _square.bottomRight,
-    _square.bottomLeft,
-    _square.topLeft,
-  ]),
-  Unistroke(DefaultUnistrokeNames.rectangle, [
-    _rectangle.topLeft,
-    _rectangle.topRight,
-    _rectangle.bottomRight,
-    _rectangle.bottomLeft,
-    _rectangle.topLeft,
-  ]),
-  Unistroke(DefaultUnistrokeNames.triangle, [
-    _square.topCenter,
-    _square.bottomRight,
-    _square.bottomLeft,
-    _square.topCenter,
-  ]),
-  Unistroke(DefaultUnistrokeNames.star, [
-    for (final theta in const [90, 234, 18, 162, 306, 90])
-      Offset(
-        cos(theta * pi / 180),
-        -sin(theta * pi / 180),
-      ),
-  ]),
-]);
+final default$1Unistrokes = List<Unistroke<DefaultUnistrokeNames>>.unmodifiable(
+  [
+    Unistroke(DefaultUnistrokeNames.line, [_square.topLeft, _square.topRight]),
+    Unistroke(DefaultUnistrokeNames.circle, [
+      for (var i = 0; i <= _circlePoints; i++)
+        Offset(
+          cos(2 * pi * i / _circlePoints),
+          sin(2 * pi * i / _circlePoints),
+        ),
+    ]),
+    Unistroke(DefaultUnistrokeNames.rectangle, isCanonical: true, [
+      _square.topLeft,
+      _square.topRight,
+      _square.bottomRight,
+      _square.bottomLeft,
+      _square.topLeft,
+    ]),
+    Unistroke(DefaultUnistrokeNames.rectangle, [
+      _rectangle.topLeft,
+      _rectangle.topRight,
+      _rectangle.bottomRight,
+      _rectangle.bottomLeft,
+      _rectangle.topLeft,
+    ]),
+    Unistroke(DefaultUnistrokeNames.triangle, [
+      _square.topCenter,
+      _square.bottomRight,
+      _square.bottomLeft,
+      _square.topCenter,
+    ]),
+    Unistroke(DefaultUnistrokeNames.star, [
+      for (final theta in const [90, 234, 18, 162, 306, 90])
+        Offset(cos(theta * pi / 180), -sin(theta * pi / 180)),
+    ]),
+  ],
+);
 
 /// The enum of the names of the default unistrokes.
 // If you add a new unistroke name, you should also add it to the README.

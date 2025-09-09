@@ -74,7 +74,7 @@ final example$1Unistrokes = List<Unistroke<String>>.unmodifiable([
     Offset(148, 155),
     Offset(143, 150),
     Offset(138, 148),
-    Offset(136, 148)
+    Offset(136, 148),
   ]),
   Unistroke('x', const [
     Offset(87, 142),
@@ -127,7 +127,7 @@ final example$1Unistrokes = List<Unistroke<String>>.unmodifiable([
     Offset(91, 222),
     Offset(89, 225),
     Offset(87, 226),
-    Offset(87, 224)
+    Offset(87, 224),
   ]),
   Unistroke('rectangle', const [
     Offset(78, 149),
@@ -211,7 +211,7 @@ final example$1Unistrokes = List<Unistroke<String>>.unmodifiable([
     Offset(107, 130),
     Offset(90, 132),
     Offset(81, 133),
-    Offset(76, 133)
+    Offset(76, 133),
   ]),
   Unistroke('circle', const [
     Offset(127, 141),
@@ -257,7 +257,7 @@ final example$1Unistrokes = List<Unistroke<String>>.unmodifiable([
     Offset(143, 129),
     Offset(140, 131),
     Offset(129, 136),
-    Offset(126, 139)
+    Offset(126, 139),
   ]),
   Unistroke('check', const [
     Offset(91, 185),
@@ -308,7 +308,7 @@ final example$1Unistrokes = List<Unistroke<String>>.unmodifiable([
     Offset(177, 112),
     Offset(177, 114),
     Offset(175, 116),
-    Offset(173, 118)
+    Offset(173, 118),
   ]),
   Unistroke('caret', const [
     Offset(79, 245),
@@ -364,7 +364,7 @@ final example$1Unistrokes = List<Unistroke<String>>.unmodifiable([
     Offset(177, 244),
     Offset(179, 250),
     Offset(181, 255),
-    Offset(182, 257)
+    Offset(182, 257),
   ]),
   Unistroke('zig-zag', const [
     Offset(307, 216),
@@ -372,7 +372,7 @@ final example$1Unistrokes = List<Unistroke<String>>.unmodifiable([
     Offset(356, 215),
     Offset(375, 186),
     Offset(399, 216),
-    Offset(418, 186)
+    Offset(418, 186),
   ]),
   Unistroke('arrow', const [
     Offset(68, 222),
@@ -440,7 +440,7 @@ final example$1Unistrokes = List<Unistroke<String>>.unmodifiable([
     Offset(171, 187),
     Offset(169, 189),
     Offset(165, 194),
-    Offset(164, 196)
+    Offset(164, 196),
   ]),
   Unistroke('left square bracket', const [
     Offset(140, 124),
@@ -518,7 +518,7 @@ final example$1Unistrokes = List<Unistroke<String>>.unmodifiable([
     Offset(144, 238),
     Offset(151, 237),
     Offset(157, 236),
-    Offset(159, 237)
+    Offset(159, 237),
   ]),
   Unistroke('right square bracket', const [
     Offset(112, 138),
@@ -565,7 +565,7 @@ final example$1Unistrokes = List<Unistroke<String>>.unmodifiable([
     Offset(124, 233),
     Offset(117, 235),
     Offset(114, 238),
-    Offset(112, 238)
+    Offset(112, 238),
   ]),
   Unistroke('v', const [
     Offset(89, 164),
@@ -614,7 +614,7 @@ final example$1Unistrokes = List<Unistroke<String>>.unmodifiable([
     Offset(162, 155),
     Offset(164, 150),
     Offset(165, 148),
-    Offset(166, 146)
+    Offset(166, 146),
   ]),
   Unistroke('delete', const [
     Offset(123, 129),
@@ -669,7 +669,7 @@ final example$1Unistrokes = List<Unistroke<String>>.unmodifiable([
     Offset(172, 133),
     Offset(177, 127),
     Offset(179, 127),
-    Offset(180, 125)
+    Offset(180, 125),
   ]),
   Unistroke('left curly brace', const [
     Offset(150, 116),
@@ -729,7 +729,7 @@ final example$1Unistrokes = List<Unistroke<String>>.unmodifiable([
     Offset(133, 215),
     Offset(142, 219),
     Offset(148, 220),
-    Offset(151, 221)
+    Offset(151, 221),
   ]),
   Unistroke('right curly brace', const [
     Offset(117, 132),
@@ -801,7 +801,7 @@ final example$1Unistrokes = List<Unistroke<String>>.unmodifiable([
     Offset(134, 250),
     Offset(126, 253),
     Offset(119, 253),
-    Offset(115, 253)
+    Offset(115, 253),
   ]),
   Unistroke('star', const [
     Offset(75, 250),
@@ -912,7 +912,7 @@ final example$1Unistrokes = List<Unistroke<String>>.unmodifiable([
     Offset(80, 244),
     Offset(73, 250),
     Offset(69, 254),
-    Offset(69, 252)
+    Offset(69, 252),
   ]),
   Unistroke('pigtail', const [
     Offset(81, 219),
@@ -979,6 +979,6 @@ final example$1Unistrokes = List<Unistroke<String>>.unmodifiable([
     Offset(192, 216),
     Offset(196, 213),
     Offset(199, 212),
-    Offset(201, 211)
+    Offset(201, 211),
   ]),
 ]);

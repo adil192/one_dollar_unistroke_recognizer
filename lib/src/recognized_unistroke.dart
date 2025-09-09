@@ -77,8 +77,12 @@ class RecognizedCustomUnistroke<K> {
     /// to the original polygon.
     final transform = Matrix4.identity()
       ..translateByDouble(originalCenter.dx, originalCenter.dy, 0, 1)
-      ..scaleByDouble(originalWidth / canonicalWidth,
-          originalHeight / canonicalHeight, 1, 1)
+      ..scaleByDouble(
+        originalWidth / canonicalWidth,
+        originalHeight / canonicalHeight,
+        1,
+        1,
+      )
       ..rotateZ(originalAngle)
       ..translateByDouble(-canonicalCenter.dx, -canonicalCenter.dy, 0, 1);
 
@@ -124,8 +128,9 @@ class RecognizedCustomUnistroke<K> {
   /// Gets the canonical form of this unistroke.
   @visibleForTesting
   Unistroke findUnscaledCanonicalPolygon() {
-    final choices =
-        referenceUnistrokes.where((ref) => ref.name == name).toList();
+    final choices = referenceUnistrokes
+        .where((ref) => ref.name == name)
+        .toList();
     assert(choices.isNotEmpty, 'No reference unistrokes with name "$name"');
     return choices.firstWhere(
       (ref) => ref.isCanonical,

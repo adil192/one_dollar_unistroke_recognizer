@@ -11,11 +11,7 @@ class Unistroke<K> {
   ///
   /// The [inputPoints] are manipulated by [processInputPoints]
   /// before being stored in [points] and [vector].
-  Unistroke(
-    this.name,
-    this.inputPoints, {
-    this.isCanonical = false,
-  });
+  Unistroke(this.name, this.inputPoints, {this.isCanonical = false});
 
   /// The name describing the unistroke.
   ///
@@ -36,12 +32,16 @@ class Unistroke<K> {
   /// The manipulated input points with aspect ratio preserved.
   ///
   /// This is best suited for detecting straight lines.
-  late final pointsWithAspectRatioPreserved =
-      processInputPoints(inputPoints, preserveAspectRatio: true);
+  late final pointsWithAspectRatioPreserved = processInputPoints(
+    inputPoints,
+    preserveAspectRatio: true,
+  );
 
   /// The manipulated input points, before being [resample]d.
-  late final pointsBeforeResampling =
-      processInputPoints(inputPoints, shouldResample: false);
+  late final pointsBeforeResampling = processInputPoints(
+    inputPoints,
+    shouldResample: false,
+  );
 
   /// The vectorized version of [points],
   /// used for the Protractor algorithm.
@@ -85,13 +85,18 @@ class Unistroke<K> {
     if (shouldResample) {
       // copy to new list since [resample] mutates
       points = resample(points.toList(), numPoints);
-      assert(points.length == numPoints,
-          'resampled to ${points.length} but expected $numPoints');
+      assert(
+        points.length == numPoints,
+        'resampled to ${points.length} but expected $numPoints',
+      );
     }
     final radians = indicativeAngle(points);
     points = rotateBy(points, -radians);
-    points = scaleTo(points,
-        squareSize: squareSize, preserveAspectRatio: preserveAspectRatio);
+    points = scaleTo(
+      points,
+      squareSize: squareSize,
+      preserveAspectRatio: preserveAspectRatio,
+    );
     points = translateTo(points, Offset.zero);
     return points;
   }

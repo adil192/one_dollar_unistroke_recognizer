@@ -9,18 +9,15 @@ void main() {
           // The line template is tested in straight_lines_test.dart
           if (unistroke.name == DefaultUnistrokeNames.line) continue;
 
-          test(
-            '${unistroke.name} (useProtractor: $useProtractor, '
-            'reversed: $reversed)',
-            () {
-              final result = recognizeUnistroke(
-                reversed ? unistroke.reversedPoints : unistroke.points,
-                useProtractor: useProtractor,
-              );
-              expect(result, isNotNull);
-              expect(result!.name, unistroke.name);
-            },
-          );
+          test('${unistroke.name} (useProtractor: $useProtractor, '
+              'reversed: $reversed)', () {
+            final result = recognizeUnistroke(
+              reversed ? unistroke.reversedPoints : unistroke.points,
+              useProtractor: useProtractor,
+            );
+            expect(result, isNotNull);
+            expect(result!.name, unistroke.name);
+          });
         }
       }
     }

@@ -5,12 +5,8 @@ import 'package:one_dollar_unistroke_recognizer/one_dollar_unistroke_recognizer.
 
 /// These should be recognized as straight lines
 final lines = {
-  'perfect_horizontal': [
-    for (var i = 0.0; i < 100; i++) Offset(i, 50),
-  ],
-  'perfect_vertical': [
-    for (var i = 0.0; i < 100; i++) Offset(50, i),
-  ],
+  'perfect_horizontal': [for (var i = 0.0; i < 100; i++) Offset(i, 50)],
+  'perfect_vertical': [for (var i = 0.0; i < 100; i++) Offset(50, i)],
   'line_with_small_lip': [
     for (var i = 0.0; i < 99; i++) Offset(i, 50),
     const Offset(100, 55),
@@ -20,11 +16,7 @@ final lines = {
     const Offset(100, 70),
   ],
   'polynomial_2': [
-    for (var i = 0.0; i < 100; i++)
-      Offset(
-        i,
-        100 - i * i / 100,
-      ),
+    for (var i = 0.0; i < 100; i++) Offset(i, 100 - i * i / 100),
   ],
 };
 
@@ -36,11 +28,7 @@ final curves = {
   ],
   for (var p = 3; p <= 10; p++)
     'polynomial_$p': [
-      for (var i = 0.0; i < 100; i++)
-        Offset(
-          i,
-          100 - i * pow(i / 100, p - 1),
-        ),
+      for (var i = 0.0; i < 100; i++) Offset(i, 100 - i * pow(i / 100, p - 1)),
     ],
 };
 
@@ -55,9 +43,13 @@ void main() {
               .toList(),
         );
         printOnFailure(
-            'Detected as ${result?.name} with score ${result?.score}');
-        expect(result?.name, DefaultUnistrokeNames.line,
-            reason: '$key should be recognized as line');
+          'Detected as ${result?.name} with score ${result?.score}',
+        );
+        expect(
+          result?.name,
+          DefaultUnistrokeNames.line,
+          reason: '$key should be recognized as line',
+        );
       });
     }
 
@@ -70,9 +62,13 @@ void main() {
               .toList(),
         );
         printOnFailure(
-            'Detected as ${result?.name} with score ${result?.score}');
-        expect(result?.name, isNull,
-            reason: '$key should not be recognized as line');
+          'Detected as ${result?.name} with score ${result?.score}',
+        );
+        expect(
+          result?.name,
+          isNull,
+          reason: '$key should not be recognized as line',
+        );
       });
     }
   });

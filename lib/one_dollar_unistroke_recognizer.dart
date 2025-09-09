@@ -97,8 +97,10 @@ RecognizedCustomUnistroke<K>? recognizeCustomUnistroke<K>(
   List<Offset> inputPoints, {
   bool useProtractor = true,
   List<Unistroke<K>>? overrideReferenceUnistrokes,
-  @Deprecated('This is no longer needed. Just make sure the template has 2 '
-      'distinct points if you want to recognize straight lines.')
+  @Deprecated(
+    'This is no longer needed. Just make sure the template has 2 '
+    'distinct points if you want to recognize straight lines.',
+  )
   K? straightLineName,
 }) {
   // Not enough points to recognize
@@ -119,16 +121,14 @@ RecognizedCustomUnistroke<K>? recognizeCustomUnistroke<K>(
 
       closestUnistroke = unistrokeTemplate;
       // Inverse of the score calculated below
-      closestUnistrokeDist =
-          useProtractor ? (1 - score) : (1 - score) * Unistroke.squareDiagonal;
+      closestUnistrokeDist = useProtractor
+          ? (1 - score)
+          : (1 - score) * Unistroke.squareDiagonal;
       break;
     }
 
     final distance = useProtractor
-        ? optimalCosineDistance(
-            unistrokeTemplate.vector,
-            candidate.vector,
-          )
+        ? optimalCosineDistance(unistrokeTemplate.vector, candidate.vector)
         : distanceAtBestAngle(
             candidate.points,
             unistrokeTemplate.points,
@@ -170,7 +170,8 @@ RecognizedCustomUnistroke<K>? recognizeCustomUnistroke<K>(
     closestUnistroke.name,
     score,
     originalPoints: inputPoints,
-    referenceUnistrokes: (overrideReferenceUnistrokes ?? referenceUnistrokes)
-        as List<Unistroke<K>>,
+    referenceUnistrokes:
+        (overrideReferenceUnistrokes ?? referenceUnistrokes)
+            as List<Unistroke<K>>,
   );
 }

@@ -17,8 +17,10 @@ final phi = 0.5 * (-1.0 + math.sqrt(5.0));
 /// Resamples [points] to have [numPoints] points.
 ///
 /// Note that this mutates [points].
-List<Offset> resample(List<Offset> points,
-    [int numPoints = Unistroke.numPoints]) {
+List<Offset> resample(
+  List<Offset> points, [
+  int numPoints = Unistroke.numPoints,
+]) {
   // Special case for a line, just lerp between the two points.
   if (points.length == 2) {
     return List.generate(numPoints, (i) {
@@ -33,7 +35,8 @@ List<Offset> resample(List<Offset> points,
   for (var i = 1; i < points.length; ++i) {
     final distance = (points[i] - points[i - 1]).distance;
     if (currentIntervalD + distance >= intervalLength) {
-      final newPoint = points[i - 1] +
+      final newPoint =
+          points[i - 1] +
           (points[i] - points[i - 1]) *
               ((intervalLength - currentIntervalD) / distance);
       // append new point
@@ -67,10 +70,12 @@ List<Offset> rotateBy(List<Offset> points, double radians) {
   final cos = math.cos(radians);
   final sin = math.sin(radians);
   return points
-      .map((p) => Offset(
-            (p.dx - c.dx) * cos - (p.dy - c.dy) * sin + c.dx,
-            (p.dx - c.dx) * sin + (p.dy - c.dy) * cos + c.dy,
-          ))
+      .map(
+        (p) => Offset(
+          (p.dx - c.dx) * cos - (p.dy - c.dy) * sin + c.dx,
+          (p.dx - c.dx) * sin + (p.dy - c.dy) * cos + c.dy,
+        ),
+      )
       .toList();
 }
 
@@ -89,10 +94,10 @@ List<Offset> scaleTo(
   final scaleY = preserveAspectRatio ? longestSide : b.height;
 
   return points
-      .map((p) => Offset(
-            p.dx * (squareSize / scaleX),
-            p.dy * (squareSize / scaleY),
-          ))
+      .map(
+        (p) =>
+            Offset(p.dx * (squareSize / scaleX), p.dy * (squareSize / scaleY)),
+      )
       .toList();
 }
 
@@ -134,8 +139,13 @@ double optimalCosineDistance(List<double> vector1, List<double> vector2) {
 }
 
 /// Golden section search (original $1 recognizer)
-double distanceAtBestAngle(List<Offset> points, List<Offset> template, double a,
-    double b, double threshold) {
+double distanceAtBestAngle(
+  List<Offset> points,
+  List<Offset> template,
+  double a,
+  double b,
+  double threshold,
+) {
   var x1 = phi * a + (1.0 - phi) * b;
   var f1 = distanceAtAngle(points, template, x1);
   var x2 = (1.0 - phi) * a + phi * b;

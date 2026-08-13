@@ -51,8 +51,6 @@ linter:
 
     use_enums: true
 
-    use_if_null_to_convert_nulls_to_bools: true
-
     use_is_even_rather_than_modulo: true
 
     use_named_constants: true
@@ -100,7 +98,6 @@ linter:
     sort_constructors_first: true
 
     unawaited_futures: true
-    unnecessary_await_in_return: true
     avoid_void_async: true
 
     use_setters_to_change_properties: true

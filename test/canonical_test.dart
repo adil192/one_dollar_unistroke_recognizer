@@ -1,7 +1,7 @@
 import 'dart:math' as math;
 import 'dart:ui' show PointMode;
 
-import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:one_dollar_unistroke_recognizer/one_dollar_unistroke_recognizer.dart';
 import 'package:one_dollar_unistroke_recognizer/src/utils.dart';
@@ -170,7 +170,7 @@ class _Painter extends CustomPainter {
       ..style = PaintingStyle.stroke;
 
     if (recognizedStroke == null) {
-      return canvas.drawColor(Colors.red, BlendMode.color);
+      return canvas.drawColor(const Color(0xFFFF0000), BlendMode.color);
     }
 
     final line = recognizedStroke!.convertToLine();
@@ -183,29 +183,25 @@ class _Painter extends CustomPainter {
         recognizedStroke!.originalPoints,
         paint
           ..strokeWidth = 4
-          ..color = Colors.white.withValues(alpha: 0.5),
+          ..color = const Color(0x80FFFFFF),
       )
       ..drawPoints(
         PointMode.polygon,
         recognizedStroke!.originalPoints,
         paint
           ..strokeWidth = 2
-          ..color = Colors.black.withValues(alpha: 0.5),
+          ..color = const Color(0x80000000),
       )
       ..drawPoints(
         PointMode.polygon,
         recognizedStroke!.convertToCanonicalPolygon(),
-        paint..color = Colors.red,
+        paint..color = const Color(0xFFFF0000),
       )
-      ..drawLine(line.$1, line.$2, paint..color = Colors.orange)
-      ..drawCircle(
-        circle.$1,
-        circle.$2,
-        paint..color = Colors.blue.withValues(alpha: 0.5),
-      )
+      ..drawLine(line.$1, line.$2, paint..color = const Color(0xFFFF9800))
+      ..drawCircle(circle.$1, circle.$2, paint..color = const Color(0x800000FF))
       ..drawRRect(
         RRect.fromRectAndRadius(rect, const Radius.circular(10)),
-        paint..color = Colors.green.withValues(alpha: 0.5),
+        paint..color = const Color(0x8000FF00),
       );
   }
 

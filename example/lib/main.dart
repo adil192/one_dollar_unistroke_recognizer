@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:one_dollar_unistroke_recognizer/one_dollar_unistroke_recognizer.dart';
 import 'package:one_dollar_unistroke_recognizer_example/canvas_draw.dart';
 import 'package:one_dollar_unistroke_recognizer_example/unistroke_preview.dart';

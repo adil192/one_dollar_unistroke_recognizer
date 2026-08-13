@@ -19,12 +19,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: '\$1 Unistroke Recognizer Demo',
-      theme: ThemeData(
-        colorScheme: ColorScheme.highContrastLight(),
-      ),
-      darkTheme: ThemeData(
-        colorScheme: ColorScheme.highContrastDark(),
-      ),
+      theme: ThemeData(colorScheme: ColorScheme.highContrastLight()),
+      darkTheme: ThemeData(colorScheme: ColorScheme.highContrastDark()),
       home: Scaffold(
         appBar: AppBar(
           title: ValueListenableBuilder(
@@ -34,7 +30,7 @@ class MyApp extends StatelessWidget {
                 recognized == null
                     ? 'Draw below to detect a shape'
                     : 'Detected "${recognized.name?.name}" with score '
-                        '${recognized.score.toStringAsFixed(2)}',
+                          '${recognized.score.toStringAsFixed(2)}',
               );
             },
           ),
@@ -63,10 +59,10 @@ class MyApp extends StatelessWidget {
                   recognized: recognized,
                   onDraw: (points) {
                     if (pointDebounce == null || !pointDebounce!.isActive) {
-                      pointDebounce =
-                          Timer(const Duration(milliseconds: 100), () {
-                        recognized.value = recognizeUnistroke(points);
-                      });
+                      pointDebounce = Timer(
+                        const Duration(milliseconds: 100),
+                        () => recognized.value = recognizeUnistroke(points),
+                      );
                     }
                   },
                   onDrawEnd: (points) {

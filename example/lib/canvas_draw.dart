@@ -57,9 +57,7 @@ class _CanvasDrawState extends State<CanvasDraw> with ChangeNotifier {
         widget.onDrawEnd(points);
         notifyListeners();
       },
-      child: CustomPaint(
-        painter: _CanvasDrawPainter(this),
-      ),
+      child: CustomPaint(painter: _CanvasDrawPainter(this)),
     );
   }
 }

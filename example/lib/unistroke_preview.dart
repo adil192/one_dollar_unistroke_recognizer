@@ -5,10 +5,7 @@ import 'package:material_ui/material_ui.dart';
 import 'package:one_dollar_unistroke_recognizer/one_dollar_unistroke_recognizer.dart';
 
 class UnistrokePreview extends StatelessWidget {
-  const UnistrokePreview({
-    super.key,
-    required this.unistroke,
-  });
+  const UnistrokePreview({super.key, required this.unistroke});
 
   final Unistroke unistroke;
 
@@ -21,9 +18,7 @@ class UnistrokePreview extends StatelessWidget {
           children: [
             Text(
               (unistroke.name as DefaultUnistrokeNames).name,
-              style: const TextStyle(
-                fontSize: 20,
-              ),
+              style: const TextStyle(fontSize: 20),
             ),
             SizedBox(
               width: 50,
@@ -69,10 +64,7 @@ class _UnistrokePreviewPainter extends CustomPainter {
   static List<Offset> _normalizePoints(List<Offset> points, Size newSize) {
     if (points.length <= 2) {
       // For a line, return a diagonal line
-      return [
-        Offset.zero,
-        Offset(newSize.width, newSize.height),
-      ];
+      return [Offset.zero, Offset(newSize.width, newSize.height)];
     }
 
     final minX = points.map((e) => e.dx).reduce(min);
@@ -82,10 +74,12 @@ class _UnistrokePreviewPainter extends CustomPainter {
     final oldSize = Size(maxX - minX, maxY - minY);
 
     return points
-        .map((point) => Offset(
-              (point.dx - minX) / oldSize.width * newSize.width,
-              (point.dy - minY) / oldSize.height * newSize.height,
-            ))
+        .map(
+          (point) => Offset(
+            (point.dx - minX) / oldSize.width * newSize.width,
+            (point.dy - minY) / oldSize.height * newSize.height,
+          ),
+        )
         .toList();
   }
 }

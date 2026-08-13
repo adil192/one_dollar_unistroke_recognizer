@@ -1,3 +1,7 @@
+# 1.3.5
+
+- Removed imports from the soon-to-be deprecated `package:flutter/material.dart`. This may help with tree shaking.
+
 # 1.3.4
 
 - Updated deprecated methods for Flutter 3.35.
